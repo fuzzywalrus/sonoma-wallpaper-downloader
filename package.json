@@ -1,15 +1,29 @@
 {
   "name": "sonoma-wallpapers",
   "version": "1.0.0",
-  "description": "A simple app that displays the Sonoma Video Wallpapers",
+  "description": "A simple app that allows user to download the Sonoma Video Wallpapers",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
   "author": "Greg Gant",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^28.2.0"
+    "electron": "^28.2.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.greggant.sonomawallpapers",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "default",
+          "arch": ["universal"]
+        }
+      ]
+    }
   }
 }
