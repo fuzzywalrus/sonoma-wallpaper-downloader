@@ -8,15 +8,16 @@ However, I wanted to do something a bit different and allow users to download th
 
 ## Usage
 
+![Sonoma Video Wallpaper Downloader Cannot Be Verified](http://blog.greggant.com/images/posts/2024-01-24-cannot-be-verified.png)
+
 This is currently an unsigned application. You will receive an unidentified developer message. To bypass this error, right-click ( control-click or two-finger click on a trackpad) and select open.
 
-The app requires Sonoma to read system files to extrapolate the currently available backgrounds to download. This may result in a short delay as the images are loaded. 
+![Sonoma Video Wallpaper Downloader right](http://blog.greggant.com/images/posts/2024-01-24-right-click.png)
+
+Users on non-14.0+ will bounce to all the wallpapers released as of macOS 14.1.1 (23B81).
 
 Click the image or title to trigger a download.
 
-# Important: This app requires Sonoma or later to function properly!
-
-This application is dependent on reading the system preference files to grab a current list of the available video wallpapers.
 
 ## Downloading the App
 
