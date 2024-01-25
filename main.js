@@ -12,11 +12,13 @@ const createWindow = () => {
     width: 1280,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false, // For Electron 12+, you might need to set this to false
     }
     
   })
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
   
 
   // and load the index.html of the app.
