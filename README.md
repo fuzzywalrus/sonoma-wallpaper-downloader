@@ -14,6 +14,9 @@ This is currently an unsigned application. You will receive an unidentified deve
 
 ![Sonoma Video Wallpaper Downloader right](http://blog.greggant.com/images/posts/2024-01-24-right-click.png)
 
+
+## Pre macOS 14 notes
+
 Users on non-14.0+ will bounce to all the wallpapers released as of macOS 14.1.1 (23B81). It's important to note that the videos are 4k 240 FPS in HEVC. Older OSes may not support the video format. Older computesr may not be able to playback the video files.
 
 Click the image or title to trigger a download.
