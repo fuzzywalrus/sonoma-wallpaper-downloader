@@ -37,7 +37,7 @@ The initial build took roughly 4+ hours, as I'd never built an electron applicat
 
 ### Future release plans
 
-I'm not sure of the copyright implications of including the URLs to the files, but I will likely make a fallback for non-sonoma users that provides the necessary data to the Sonoma14.1.1 (23B81) release as a fallback. The current design _should_ continue to work moving forward as Apple adds new videos as it reads the current OS's list provided Apple does not radically change the way Wallpapers work. Provided it doesn't require a lot of effort, I'd like to also provide a download completion status.
+he current design _should_ continue to work moving forward as Apple adds new videos as it reads the current OS's list provided Apple does not radically change the way Wallpapers work. Provided it doesn't require a lot of effort, I'd like to also provide a download completion status and perhaps move this to Next.js or React.
 
 This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality. 
 
