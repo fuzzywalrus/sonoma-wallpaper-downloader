@@ -11,23 +11,67 @@ const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')
 const createLinksList = require('./js/createLinksList');
 
-// Path to your file
-// File path
+
 const localizedStrings = '/Library/Application Support/com.apple.idleassetsd/Customer/TVIdleScreenStrings.bundle/en.lproj/Localizable.nocache.strings';
 const entriesJson = 'file:///Library/Application%20Support/com.apple.idleassetsd/Customer/entries.json'
 
+// Fallbacks
+const fallbackLocalizedString = 'https://assets.codepen.io/168181/Localizable.nocache.strings';
+const fallbackEntriesJson = 'https://assets.codepen.io/168181/entries.json'; 
+
 async function readAndProcessData() {
+    let parsedData;
+
+    // Check to see if the localizedStrings is on the local machine, if not use the  fallbackLocalizedString
     try {
-        // Read and parse plist file
+        // Try reading the plist file from the local file system
         const data = await fs.readFile(localizedStrings);
-        const parsedData = bplistParser.parseBuffer(data);
+        parsedData = bplistParser.parseBuffer(data);
+    } catch (localError) {
+        console.log('Local file read failed: ', localError.message);
+        console.log('Trying fallback URL for plist...');
+
+        try {
+            // Fallback: Fetch from URL
+            const response = await fetch(fallbackLocalizedString);
+            if (!response.ok) {
+                throw new Error('Fallback URL failed: ' + response.statusText);
+            }
+            const arrayBuffer = await response.arrayBuffer();
+            const buffer = Buffer.from(arrayBuffer); // Convert array buffer to buffer. This is some chatGPT magic.
+            parsedData = bplistParser.parseBuffer(buffer);
+        } catch (fallbackError) {
+            console.error("Problem with fallback for plist:", fallbackError);
+            return;
+        }
+    }
+
+    // Check to see if the entriesJson is on the local machine, if not use the fallbackEntriesJson
+
+    try {
+    
         references = parsedData[0];
         console.log(references);
 
         // Fetch JSON data
-        const response = await fetch(entriesJson);
+        let response;
+        try {
+            // Try fetching the primary URL
+            response = await fetch(entriesJson);
+        } catch (error) {
+            console.log('Primary URL failed: ', error.message);
+            console.log('Trying fallback URL...');
+            response = await fetch(fallbackEntriesJson); // Attempt to use the fallback URL
+        }
+
         if (!response.ok) {
-            throw new Error('Not loading' + response.statusText);
+            throw new Error('Both primary and fallback URLs failed: ' + response.statusText);
+        }
+
+        // Check if the response is actually JSON
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error('Fetched content is not valid JSON');
         }
         jsonData = await response.json();
 
@@ -52,10 +96,6 @@ function doallthethings() {
 			const sortedData = sortJson(jsonData, references);
 			const orderedData = reorderJson(sortedData, references);
 
-			// Output the sorted JSON
-			// console.log(JSON.stringify(orderedData, null, 4));
-			// document.getElementById('json').textContent = JSON.stringify(sortedData, null, 4);
-
 			createLinksList(orderedData, references);
 	} else {
 		const linksContainer = document.getElementById('links');
@@ -64,8 +104,3 @@ function doallthethings() {
 
 }
 doallthethings();
-
-
-
-
-
