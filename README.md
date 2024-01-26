@@ -1,6 +1,8 @@
 # The Sonoma Video Wallpaper Downloader
 
-![Sonoma Video Wallpaper Downloader](http://blog.greggant.com/images/posts/2024-01-24-sonoma-downloader-v1.png)
+
+[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)]([https://youtu.be/nTQUwghvy5Q](https://www.youtube.com/watch?v=D6yynEDJ5gI))
+
 
 I took inspiration from https://github.com/mikeswanson/WallGet, which is a Wallpaper downloader for macOS Sonoma that uses a Python script to trigger downloading all of the macOS Sonoma video wallpapers.
 
