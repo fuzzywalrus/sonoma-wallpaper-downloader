@@ -1,4 +1,3 @@
-<img width="1520" alt="Screenshot 2024-01-26 at 12 32 18 AM" src="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/69bcf2d7-0012-4958-9686-b363d2ffa072"># The Sonoma Video Wallpaper Downloader
 
 ![I made a video too](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/71fcb78d-e6c7-47e0-9c59-defc427fc787)
 
