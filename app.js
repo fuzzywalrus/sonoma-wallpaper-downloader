@@ -5,11 +5,26 @@ let jsonData, references;
 const fs = require('fs').promises; // Use the promise-based version of fs
 const plist = require('plist');
 const bplistParser = require('bplist-parser');
+const { ipcRenderer } = require('electron');
+ipcRenderer.on('update_available', () => {
+// Inform user about the update being available and possibly show a notification
+});
+
+ipcRenderer.on('update_downloaded', () => {
+// Ask user if they want to install the update now
+    ipcRenderer.send('restart_app');
+});
+
+
 
 //custom
 const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')
 const createLinksList = require('./js/createLinksList');
+const downloadProgress = require('./js/downloadProgress');
+
+downloadProgress();
+
 
 
 const localizedStrings = '/Library/Application Support/com.apple.idleassetsd/Customer/TVIdleScreenStrings.bundle/en.lproj/Localizable.nocache.strings';
@@ -51,7 +66,7 @@ async function readAndProcessData() {
     try {
     
         references = parsedData[0];
-        console.log(references);
+        //console.log(references);
 
         // Fetch JSON data
         let response;
@@ -104,3 +119,6 @@ function doallthethings() {
 
 }
 doallthethings();
+
+
+

@@ -1,6 +1,6 @@
 {
   "name": "sonoma-wallpapers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple app that allows user to download the Sonoma Video Wallpapers.",
   "main": "main.js",
   "scripts": {
@@ -30,6 +30,29 @@
   },
   "dependencies": {
     "bplist-parser": "^0.3.2",
+    "electron-updater": "^6.1.7",
     "plist": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fuzzywalrus/sonoma-wallpaper-downloader"
+  },
+  "build": {
+    "appId": "com.greggant.sonomawallpapers",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "default",
+          "arch": ["universal"]
+        }
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "fuzzywalrus",
+      "repo": "sonoma-wallpaper-downloader"
+    }
   }
+  
 }

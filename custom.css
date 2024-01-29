@@ -48,3 +48,27 @@ a {
         color: white;
     }
 }
+
+#progressBar {
+    transition: width 1s; 
+    width: 0%; 
+    height: 5px; 
+    background-color: #3787F8;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+
+.fade-out {
+    animation: fadeOutAnimation 2s forwards; 
+    animation-delay: 1s; 
+  }
+  
+  @keyframes fadeOutAnimation {
+    to {
+      opacity: 0;
+    }
+  }

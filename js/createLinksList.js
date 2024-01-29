@@ -6,7 +6,7 @@ const createLinksList = (jsonData) => {
     linksContainer.innerHTML = '';
 
     assets.forEach(asset => {
-        console.log(asset);
+        //console.log(asset);
 
         // Use label from references if available, otherwise fall back to accessibilityLabel
         const label = asset.newLabel || asset.accessibilityLabel;
