@@ -7,14 +7,15 @@ const plist = require('plist');
 const bplistParser = require('bplist-parser');
 const { ipcRenderer } = require('electron');
 ipcRenderer.on('update_available', () => {
-// Inform user about the update being available and possibly show a notification
+    alert('A new update is available. Downloading now...');
 });
 
 ipcRenderer.on('update_downloaded', () => {
-// Ask user if they want to install the update now
-    ipcRenderer.send('restart_app');
+    let userResponse = confirm('A new update has been downloaded. Would you like to restart the app to install the update now?');
+    if (userResponse) {
+        ipcRenderer.send('restart_app');
+    }
 });
-
 //custom
 const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')

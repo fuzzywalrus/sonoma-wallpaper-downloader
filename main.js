@@ -7,9 +7,12 @@ const { autoUpdater } = require('electron-updater');
 
 app.commandLine.appendSwitch('ignore-certificate-errors')
 
+
+let mainWindow; // Declare mainWindow globally
+
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
     webPreferences: {
@@ -19,7 +22,7 @@ const createWindow = () => {
     }
     
   })
-
+  
   // Track file download progress
   mainWindow.webContents.session.on('will-download', (event, downloadItem, webContents) => {
     // Set the save path, making Electron not to prompt a save dialog
@@ -45,6 +48,7 @@ const createWindow = () => {
         console.log(`Download failed: ${state}`)
       }
     })
+    
   });
 
   // and load the index.html of the app.
@@ -53,8 +57,6 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
-
-
 
 
 // This method will be called when Electron has finished
@@ -71,12 +73,6 @@ app.whenReady().then(() => {
   })
 })
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit()
-})
 
 autoUpdater.on('update-available', () => {
   // Notify the renderer process that an update is available
@@ -91,6 +87,14 @@ autoUpdater.on('update-downloaded', () => {
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit()
+})
+
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

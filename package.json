@@ -1,6 +1,6 @@
 {
   "name": "sonoma-wallpapers",
-  "version": "1.0.2",
+  "version": "0.9.0",
   "description": "A simple app that allows user to download the Sonoma Video Wallpapers.",
   "main": "main.js",
   "scripts": {
@@ -13,20 +13,6 @@
   "devDependencies": {
     "electron": "^28.2.0",
     "electron-builder": "^24.9.1"
-  },
-  "build": {
-    "appId": "com.greggant.sonomawallpapers",
-    "mac": {
-      "category": "public.app-category.utilities",
-      "target": [
-        {
-          "target": "default",
-          "arch": [
-            "universal"
-          ]
-        }
-      ]
-    }
   },
   "dependencies": {
     "bplist-parser": "^0.3.2",
@@ -54,5 +40,4 @@
       "repo": "sonoma-wallpaper-downloader"
     }
   }
-  
 }
