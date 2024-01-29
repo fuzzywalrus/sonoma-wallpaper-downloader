@@ -15,8 +15,6 @@ ipcRenderer.on('update_downloaded', () => {
     ipcRenderer.send('restart_app');
 });
 
-
-
 //custom
 const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')
@@ -100,8 +98,6 @@ async function readAndProcessData() {
 }
 
 readAndProcessData();
-
-
 
 /// runtime
 
