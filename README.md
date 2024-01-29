@@ -1,8 +1,13 @@
-# The Sonoma Video Wallpaper Downloader
 
-![Sonoma Video Wallpaper Downloader](http://blog.greggant.com/images/posts/2024-01-24-sonoma-downloader-v1.png)
+![I made a video too](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/71fcb78d-e6c7-47e0-9c59-defc427fc787)
+
+[Watch the YouTube video](https://www.youtube.com/watch?v=D6yynEDJ5gI)
+
 
 I took inspiration from https://github.com/mikeswanson/WallGet, which is a Wallpaper downloader for macOS Sonoma that uses a Python script to trigger downloading all of the macOS Sonoma video wallpapers.
+
+<img width="1520" alt="Screenshot 2024-01-26 at 12 32 18 AM" src="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/e0749462-b6e2-45b2-9897-cf977ffe4fc6">
+
 
 However, I wanted to do something a bit different and allow users to download the individual wallpapers and save them wherever they would like. Downloads may take several minutes, depending on your internet connection. Currently, there are about 130+ videos, totaling 65 GBs of videos. Apple has introduced more videos over time on the Apple TV and will likely add more for macOS as well in future OS releases. With any luck the format will stay the same under macOS and this app will work in future version of macOS.
 
