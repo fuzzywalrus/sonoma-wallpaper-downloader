@@ -6,17 +6,30 @@ const fs = require('fs').promises; // Use the promise-based version of fs
 const plist = require('plist');
 const bplistParser = require('bplist-parser');
 const { ipcRenderer } = require('electron');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("sending test!")
+    ipcRenderer.send('test');
+});
+
+/*
 ipcRenderer.on('update_available', () => {
     alert('A new update is available. Downloading now...');
+   
 });
 
 ipcRenderer.on('update_downloaded', () => {
     let userResponse = confirm('A new update has been downloaded. Would you like to restart the app to install the update now?');
+    console.log("userResponse:", userResponse)
     if (userResponse) {
+        console.log("fire restart_app");
         ipcRenderer.send('restart_app');
     }
 });
+*/
 //custom
+/*
 const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')
 const createLinksList = require('./js/createLinksList');
@@ -119,3 +132,4 @@ doallthethings();
 
 
 
+*/

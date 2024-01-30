@@ -55,7 +55,7 @@ const createWindow = () => {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 
@@ -81,11 +81,16 @@ autoUpdater.on('update-available', () => {
 
 autoUpdater.on('update-downloaded', () => {
   // Notify the renderer process that the update has been downloaded
+  mainWindow.setClosable(true);
   mainWindow.webContents.send('update_downloaded');
 });
 
 ipcMain.on('restart_app', () => {
+  console.log("restart_app");
   autoUpdater.quitAndInstall();
+});
+ipcMain.on('test', () => {
+  console.log("test received!")
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
