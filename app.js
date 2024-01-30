@@ -29,7 +29,6 @@ ipcRenderer.on('update_downloaded', () => {
 });
 */
 //custom
-/*
 const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')
 const createLinksList = require('./js/createLinksList');
@@ -132,4 +131,3 @@ doallthethings();
 
 
 
-*/
