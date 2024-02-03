@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ipcRenderer.send('test');
 });
 
-/*
+
 ipcRenderer.on('update_available', () => {
     alert('A new update is available. Downloading now...');
    
@@ -27,7 +27,7 @@ ipcRenderer.on('update_downloaded', () => {
         ipcRenderer.send('restart_app');
     }
 });
-*/
+
 //custom
 const sortJson =  require('./js/sortJson')
 const reorderJson = require('./js/reorderJson')

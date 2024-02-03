@@ -5,8 +5,12 @@ const { app, BrowserWindow, session, ipcMain } = require('electron')
 const path = require('node:path')
 const { autoUpdater } = require('electron-updater');
 
-app.commandLine.appendSwitch('ignore-certificate-errors')
+// Set up the logger for autoUpdater
+autoUpdater.logger = require("electron-log")
+autoUpdater.logger.transports.file.level = "info"
 
+
+app.commandLine.appendSwitch('ignore-certificate-errors')
 
 let mainWindow; // Declare mainWindow globally
 
@@ -16,12 +20,14 @@ const createWindow = () => {
     width: 1280,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      //preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: false, // For Electron 12+, you might need to set this to false
     }
     
   })
+  console.log("Step 1")
+
   
   // Track file download progress
   mainWindow.webContents.session.on('will-download', (event, downloadItem, webContents) => {
@@ -48,15 +54,25 @@ const createWindow = () => {
         console.log(`Download failed: ${state}`)
       }
     })
-    
+  });
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html');
+  mainWindow.on('ready-to-show', () => {
+      mainWindow.webContents.send('main-process-ready');
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
+  console.log("It begins")
+
 }
+
+
+ipcMain.on('channel-name', (event, data) => {
+  console.log('Data received:', data);
+  // Further processing
+});
 
 
 // This method will be called when Electron has finished
@@ -74,6 +90,7 @@ app.whenReady().then(() => {
 })
 
 
+
 autoUpdater.on('update-available', () => {
   // Notify the renderer process that an update is available
   mainWindow.webContents.send('update_available');
@@ -85,12 +102,18 @@ autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
 });
 
+
 ipcMain.on('restart_app', () => {
   console.log("restart_app");
   autoUpdater.quitAndInstall();
 });
+
 ipcMain.on('test', () => {
   console.log("test received!")
+  console.log("test received!")
+  console.log("test received!")
+  console.log("test received!")
+
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
