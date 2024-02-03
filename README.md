@@ -13,12 +13,7 @@ However, I wanted to do something a bit different and allow users to download th
 
 ## Usage
 
-![Sonoma Video Wallpaper Downloader Cannot Be Verified](http://blog.greggant.com/images/posts/2024-01-24-cannot-be-verified.png)
-
-This is currently an unsigned application. You will receive an unidentified developer message. To bypass this error, right-click ( control-click or two-finger click on a trackpad) and select open.
-
-![Sonoma Video Wallpaper Downloader right](http://blog.greggant.com/images/posts/2024-01-24-right-click.png)
-
+The app is now signed code and features auto-updates!
 
 ## Pre macOS 14 notes
 
@@ -51,10 +46,6 @@ Since this is an Electron app, I apologize about the 190 MB+ size.
 
 # Troubleshooting / FAQ
 
-
-### Problem: I can't open the app!
-
-Currently this app is unsigned code and macOS does not like that. Right click and select open, then open again. 
 
 ### Problem: I can't open the video:
 
