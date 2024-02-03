@@ -57,11 +57,12 @@ No. These are the only URLs Apple provides to the videos. If you'd like to chang
 
 I will not be making conversions of the videos as they're copyright of Apple. 
 
-### What is the copyright of these files?
+### What is the copyright of the video files?
 
 I do not know off the top of my head. This application works by reading the existing system pref files on Sonoma, particularly, only two files to generate the list of videos and thumbnails. I am not hosting or distributing anything. This is simply a different front-end for what Apple already provides.
 
 These files were produced by Apple or licensed by Apple. I'd _highly_ recommend not using the videos for anything commercial, only personal projects or for your own personal enjoyment. 
+
 
 ### Can you add more videos or let me add my own videos to my system preferences? 
 
@@ -69,5 +70,52 @@ No. There are applications that do offer alternatives to Apple's screen savers a
 
 If you're a developer, you may want to poke around yourself in `Library/Application Support/com.apple.idleassetsd/`. I am not a macOS developer by trade, hence why this is written in the bloatware known as Electron.
 
+# Developers
 
+This is a very simplistic electron app that builds a universal binary for ARM64/x86 Macs. The main.js is used for the Electron layer and app.js is used for inside the app. Main.js. There isn't much use of ipc communication in this app beyond the auto updating.
+
+## Setup 
+
+Run `npm install` to install the dependencies from the root directory of this program
+
+## Dev
+
+ `npm run dev` will trigger the development. Changes to `main.js` requires restarting the run dev.  If you'd like to use the inspect element within the environment, you'll need to unccomment or add `mainWindow.webContents.openDevTools()` in the main.js.
+
+## Building
+
+You'll need to create a .env file or disable signing 
+
+The env file should look the following for building with notorization. 
+```
+DEBUG=electron-notarize*
+APPLEID=your@email.com
+APPLEIDPASS=your-apple-pass  
+```
+
+`npm run build`
+
+To disable notarization/signing, in the package json remove or comment out the following:
+
+```
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+...
+     "afterSign": "scripts/notarize.js",
+
+```
+
+## Misc Notes
+
+Updates land in:
+
+`~/Library/Caches/sonoma-wallpapers-updater/`
+
+The update log is in:
+
+`~/Library/Logs/sonoma-wallpapers/main.log`
+
+Updates require signed code and the latest release yaml file to be part of the release to function properly.
 

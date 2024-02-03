@@ -9,8 +9,8 @@ const { ipcRenderer } = require('electron');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("sending test!")
-    ipcRenderer.send('test');
+    //console.log("sending test!")
+    //ipcRenderer.send('test');
 });
 
 

@@ -110,10 +110,6 @@ ipcMain.on('restart_app', () => {
 
 ipcMain.on('test', () => {
   console.log("test received!")
-  console.log("test received!")
-  console.log("test received!")
-  console.log("test received!")
-
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
