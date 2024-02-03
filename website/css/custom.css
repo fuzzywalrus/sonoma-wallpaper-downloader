@@ -1,0 +1,131 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+    font-size: 16px;
+    background: rgb(73,72,121);
+    background: linear-gradient(180deg, rgba(73,72,121,1) 0%, rgba(33,57,116,1) 100%);
+    min-height: 100vh;
+    margin-top:0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+.content {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+video {
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+img {
+
+    max-width: 100%;
+}
+small {
+    font-size: 12px;
+    font-weight: 200;
+}
+a {
+    color: white;
+}
+a:visited {
+    color: white;
+}
+.screenshot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 00px;
+}
+.right-click {
+    width: 100%;
+    max-width: 400px;
+}
+.bg {
+    padding-top: 40px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.3);
+}
+h1.title {
+    font-size: 85px;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 20px;
+}
+h1.title span {
+    font-weight: 900;
+
+}
+h1.title .embiggen {
+    font-size: 160px;
+}
+.subtitle {
+    margin-top: 0;
+    text-align: center;
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.no-margin {
+    margin:0;
+}
+.footer {
+    font-size: 12px;
+    font-weight: 300;
+    padding-bottom: 10px;
+}
+@media (max-width: 1400px) {
+    h1.title {
+        font-size: 82px;
+    }
+    h1.title .embiggen {
+        font-size: 154px;
+    }
+}
+
+@media (max-width: 1320px) {
+    h1.title {
+        font-size: 63px;
+    }
+    h1.title .embiggen {
+        font-size: 120px;
+    }
+}
+  
+@media (max-width: 992px) {
+    h1.title {
+        font-size: 50px;
+    }
+    h1.title .embiggen {
+        font-size: 95px;
+    }
+}
+
+@media (max-width: 769px) {
+    h1.title {
+        font-size: 36px;
+    }
+    h1.title .embiggen {
+        font-size: 68px;
+    }
+}
+@media (max-width: 576px) {
+    h1.title {
+        font-size: 19px;
+    }
+    h1.title .embiggen {
+        display: block;
+        font-size: 36px;
+    }
+}

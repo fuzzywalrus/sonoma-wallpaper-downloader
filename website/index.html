@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sonoma Wallpaper Downloader</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+
+  <meta name="description" content="A free app designed to download the video wallpapers in macOS 14 Sonoma.">
+
+  <meta property="og:title" content="A free app designed to download the video wallpapers in macOS 14 Sonoma.">
+  <meta property="og:type" content="application">
+  <meta property="og:url" content="https://wallpaper-downloader.greggant.com/">
+  <meta property="og:image" content="https://wallpaper-downloader.greggant.com/img/socialmedia.jpg">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="title">Sonoma <span>Video</span> Wallpaper <span class="embiggen">Downloader</span></h1>
+        <video width="100%" loop="" autoplay="" playsinline="" class=" " id="video"><source src="/img/loopyclip-HD1080p.mov" type="video/mp4">Your browser does not support the video tag</video>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="row">
+      <div class="col ">
+        <div class="bg">
+        <div class="content">
+        <p class="no-margin"><a href="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases"><img src="/img/sonoma-downloader-v1.png" alt="screen shot of sonoma Downloader" class="screenshot"></a></p>
+        <p class="center subtitle"><small>A free, simple GUI utility made on a whim to download macOS 14's beautiful video wallpapers.</small></p> <br>
+
+        <p>Back when Apple introduced the Apple TV 4, it included aerial drone shot screensavers; these finally made it to the Mac in macOS 14 Sonoma for use as both screensavers and wallpapers. These stunning backgrounds can be downloaded through System Preferences. This utility aims to make downloading backgrounds easier than ever and allows them to be saved wherever a user would like.</p>
+        <p>This utility does not require Sonoma.</p>
+
+
+        <h3>How to install and use</h3>
+        <ol>
+          <li>Go to the <a href="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases">GitHub Releases</a> and download the latest release</li>
+          <li>Click Open.</li>
+          <li>Click on the video(s) you'd like to download. That's it!</li>
+        </ol>
+   
+        <br>
+        <hr>
+        <br><br><br><br>
+        <h3>The story of Sonoma Video Wallpaper Downloader</h3>
+        <p>If you're interested in how this came to be, I made a behind-the-scenes video that explains how and why I made this utility at a high level. The video covers some interesting tidbits about macOS's background videos and is at a high level so non-developers can follow along.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/D6yynEDJ5gI?si=CoD1H2mo_tz84l_s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <h3>So what is this app doing exactly....?</h3>
+        <p dir="auto">macOS 14 Sonoma shipped with video wallpapers and screensavers akin to the Apple TV. These are video files hosted by Apple and referenced in <code>Library/Application Support/com.apple.idleassetsd/Customer</code> in several files. This application reads the appropriate files and then generates a list of the available video files to the host operating system and creates a pictorial list so users can download them.</p>
+        <p dir="auto">In theory, if Apple updates the OS to include new video wallpapers, this application should be able to automatically include them as long as the operating system has been updated.</p>
+        <p dir="auto">The initial build took roughly 4+ hours, as I'd never built an electron application. For simplicity, this was built using vanilla JavaScript rather than a full-blown framework like React.</p>
+        <h3>Future release plans</h3>
+        <p dir="auto">The current design should continue to work moving forward as Apple adds new videos as it reads the current OS's list, provided Apple does not radically change the way Wallpapers work. Provided it doesn't require much effort, I'd like to provide a download completion status and perhaps move this to Next.js or React.</p>
+        <p dir="auto">This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality.</p>
+        <p dir="auto">Since this is an Electron app, I apologize about the 190 MB+ size.</p>
+        <h1>Troubleshooting / FAQ</h1>
+        <h3>Troubleshooting: I can't open the app</h3>
+        <p><p dir="auto">Currently this app is unsigned code and macOS does not like that. Right click and select open, then open again.
+        <h3>Problem: I can't open the video</h3>
+        <p dir="auto">The application at this time doesn't display the download state, you may have to wait a bit. Also, if you are running an older macOS, it may not support HEVC 4k 240 FPS video. Try using Quicktime.</p>
+        <h3>Can you add different resolution support or different formats</h3>
+        <p dir="auto">No. These are the only URLs Apple provides to the videos. If you'd like to change the frames-per-second or resolution, Quicktime can export to different resolutions and you can control the slow motion effect within it. Alternately, Handbrake may work at converting the videos.</p>
+        <p dir="auto">I will not be making conversions of the videos as they're copyright of Apple.</p>
+        <h3>What is the copyright of these files?</h3>
+        <p dir="auto">I do not know off the top of my head. This application works by reading the existing system pref files on Sonoma, particularly, only two files to generate the list of videos and thumbnails. I am not hosting or distributing anything. This is simply a different front-end for what Apple already provides.</p>
+        <p dir="auto">These files were produced by Apple or licensed by Apple. I'd <em>highly</em> recommend not using the videos for anything commercial, only personal projects or for your own personal enjoyment.</p>
+        <h3>Can you add more videos or let me add my own videos to my system preferences?</h3>
+        <p dir="auto">No. Watch the YouTube video for a deeper explination. There are applications that do offer alternatives to Apple's screen savers and wallpapers. I've investigated letting users customize videos and in my very quick surface test, it doesn't appear that it is editable without going into the SQLlite database. A portion the DB is encrypted.</p>
+        <p dir="auto">If you're a developer, you may want to poke around yourself in <code>Library/Application Support/com.apple.idleassetsd/</code>. I am not a macOS developer by trade, hence why this is written in the bloatware known as Electron.</p>
+
+        <hr>
+        <div class="row footer">
+          <div class="col"><a href="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader">Sonoma Video Wallpaper Downloader Github</a> </div>
+          <div class="col center"><a href="https://blog.greggant.com">Blog</a></div>
+          <div class="col right"><a href="">YouTube</a></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="/js/app.js"></script>
+</html>
