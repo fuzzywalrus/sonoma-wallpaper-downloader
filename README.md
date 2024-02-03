@@ -93,6 +93,12 @@ APPLEID=your@email.com
 APPLEIDPASS=your-apple-pass  
 ```
 
+I followed this blow post for app signing, by followed I mean I copied besides updating the to the correct repos and using a .ENV rather than keychains.
+
+https://www.funtoimagine.com/blog/electron-mac-sign-and-notarize/
+
+
+
 `npm run build`
 
 To disable notarization/signing, in the package json remove or comment out the following:
