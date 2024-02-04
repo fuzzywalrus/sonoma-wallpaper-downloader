@@ -72,11 +72,11 @@ If you're a developer, you may want to poke around yourself in `Library/Applicat
 
 # Developers
 
-This is a very simplistic electron app that builds a universal binary for ARM64/x86 Macs. The main.js is used for the Electron layer and app.js is used for inside the app. Main.js. There isn't much use of ipc communication in this app beyond the auto updating.
+This very simplistic electron app builds a universal binary for ARM64/x86 Macs. The `main.js` is used for the Electron layer and app.js is used for inside the app. Main.js. There isn't much use of IPC communication in this app beyond the auto-updating.
 
 ## Setup 
 
-Run `npm install` to install the dependencies from the root directory of this program
+Run `npm install` to install the dependencies from the root directory of this program.
 
 ## Dev
 
@@ -93,7 +93,7 @@ APPLEID=your@email.com
 APPLEIDPASS=your-apple-pass  
 ```
 
-I followed this blow post for app signing, by followed I mean I copied besides updating the to the correct repos and using a .ENV rather than keychains.
+I followed this blog post for app signing; by followed, I mean I copied, besides updating the to the correct repos and using a .ENV rather than keychains.
 
 https://www.funtoimagine.com/blog/electron-mac-sign-and-notarize/
 
@@ -101,7 +101,7 @@ https://www.funtoimagine.com/blog/electron-mac-sign-and-notarize/
 
 `npm run build`
 
-To disable notarization/signing, in the package json remove or comment out the following:
+To disable notarization/signing, in the package JSON remove or comment out the following:
 
 ```
       "hardenedRuntime": true,
