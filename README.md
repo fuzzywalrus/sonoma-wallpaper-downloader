@@ -37,9 +37,17 @@ The initial build took roughly 4+ hours, as I'd never built an electron applicat
 
 ### Future release plans
 
+#### Current To-do:
+
+- Custom icon
+- Sorting options
+- Change the update available interaction
+
 The current design _should_ continue to work moving forward as Apple adds new videos as it reads the current OS's list provided Apple does not radically change the way Wallpapers work. Provided it doesn't require a lot of effort, I'd like to also provide a download completion status and perhaps move this to Next.js or React.
 
 This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality. 
+
+#### Possible features
 
 I may pull the lists from Aerial as I noticed that they have yanked screen savers from Apple TV, as this would give users resolution options or use it to reverse engineer the URLs. (Needs further investigation).
 
@@ -48,6 +56,8 @@ https://github.com/JohnCoates/Aerial/blob/master/Resources/Community/en.json
 https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/ManifestLoader.swift
 
 https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/Sources/SourceInfo.swift
+
+I also may move this to React and try caching the images.
 
 Since this is an Electron app, I apologize about the 190 MB+ size. 
 
@@ -84,27 +94,34 @@ This very simplistic electron app builds a universal binary for ARM64/x86 Macs. 
 
 ## Setup 
 
-Run `npm install` to install the dependencies from the root directory of this program.
+### Requirements 
 
+- Node.js
+- OptionaL: Xcode developer tools installed on your Mac if you'd like to notarize the application.
+
+
+Run `npm install` to install the dependencies from the root directory of this program. 
 ## Dev
 
  `npm run dev` will trigger the development. Changes to `main.js` requires restarting the run dev.  If you'd like to use the inspect element within the environment, you'll need to unccomment or add `mainWindow.webContents.openDevTools()` in the main.js.
 
 ## Building
 
-You'll need to create a .env file or disable signing 
+You'll need to create a .env file or disable signing. 
 
-The env file should look the following for building with notorization. 
+If you have a valid Apple Developer account, you should be able to create an Apple App password in the Apple Accounts Portal, and in the Apple Developer Portal an App ID. The env file should look the following for building with notarization. 
+
+Place the .env file in the root of the project with the following information (replace the values with your own information).
+
 ```
 DEBUG=electron-notarize*
 APPLEID=your@email.com
 APPLEIDPASS=your-apple-pass  
 ```
 
-I followed this blog post for app signing; by followed, I mean I copied, besides updating the to the correct repos and using a .ENV rather than keychains.
-
+I followed this blog post for app signing; by followed, I mean I copied, besides updating the to the correct repos and using a .ENV rather than keychains. 
+ 
 https://www.funtoimagine.com/blog/electron-mac-sign-and-notarize/
-
 
 
 `npm run build`
@@ -120,6 +137,8 @@ To disable notarization/signing, in the package JSON remove or comment out the f
      "afterSign": "scripts/notarize.js",
 
 ```
+
+This probably doesn't need to be stated but.... DO NOT SHARE YOUR .ENV FILE ON YOUR OWN REPOSITORY. 
 
 ## Misc Notes
 
