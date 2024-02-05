@@ -41,16 +41,13 @@ The current design _should_ continue to work moving forward as Apple adds new vi
 
 This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality. 
 
-I may pull the lists from Aerial as I noticed that they have yanked screen savers from Apple TV, as this would give users resolution options.
+I may pull the lists from Aerial as I noticed that they have yanked screen savers from Apple TV, as this would give users resolution options or use it to reverse engineer the URLs. (Needs further investigation).
 
 https://github.com/JohnCoates/Aerial/blob/master/Resources/Community/en.json
 
 https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/ManifestLoader.swift
 
 https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/Sources/SourceInfo.swift
-
-
-
 
 Since this is an Electron app, I apologize about the 190 MB+ size. 
 
@@ -64,9 +61,9 @@ The application at this time doesn't display the download state, you may have to
 
 ### Can you add different resolution support or different formats?
 
-No. These are the only URLs Apple provides to the videos. If you'd like to change the frames-per-second or resolution, Quicktime can export to different resolutions and you can control the slow motion effect within it. Alternately, Handbrake may work at converting the videos.
+No. These are the only URLs Apple provides to the videos. If you'd like to change the frames-per-second or resolution, Quicktime can export to different resolutions and you can control the slow motion effect within it. Alternately, Handbrake may work at converting the videos. However, this may come using Aerial as a reference point.
 
-I will not be making conversions of the videos as they're copyright of Apple. 
+I will not be making conversions of the videos as they're copyright of Apple.  
 
 ### What is the copyright of the video files?
 
