@@ -33,7 +33,7 @@ macOS 14 Sonoma shipped with video wallpapers and screensavers akin to the Apple
 
 Realistically this could be a webpage with hardcoded URLs but I wanted it to work regardless of what Apple changes. In theory, if Apple updates the OS to include new video wallpapers or makes the URLs on a per-request or per-CPU ID basis, this application should be able to automatically include them as long as the operating system has been updated.
 
-The initial build took roughly 4+ hours, as I'd never built an electron application. For simplicity, this was built using vanilla JavaScript rather than a full-blown framework like React.
+The initial build took roughly 4+ hours, as I'd never built an electron application. For simplicity, this was built using vanilla JavaScript rather than a full-blown framework like React. Ironically, getting notarization working took many many more hours thanks to the pain of Apple's developer portal and my own ignorance around auto-updates requiring signed code.
 
 
 ### Future release plans
