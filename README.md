@@ -13,7 +13,7 @@ However, I wanted to do something a bit different and allow users to download th
 
 ## Usage
 
-The app is now signed code and features auto-updates!
+The app is now signed code and features auto-updates! Download from releases and double click to run!
 
 ## Pre macOS 14 notes
 
