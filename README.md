@@ -37,9 +37,20 @@ The initial build took roughly 4+ hours, as I'd never built an electron applicat
 
 ### Future release plans
 
-he current design _should_ continue to work moving forward as Apple adds new videos as it reads the current OS's list provided Apple does not radically change the way Wallpapers work. Provided it doesn't require a lot of effort, I'd like to also provide a download completion status and perhaps move this to Next.js or React.
+The current design _should_ continue to work moving forward as Apple adds new videos as it reads the current OS's list provided Apple does not radically change the way Wallpapers work. Provided it doesn't require a lot of effort, I'd like to also provide a download completion status and perhaps move this to Next.js or React.
 
 This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality. 
+
+I may pull the lists from Aerial as I noticed that they have yanked screen savers from Apple TV, as this would give users resolution options.
+
+https://github.com/JohnCoates/Aerial/blob/master/Resources/Community/en.json
+
+https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/ManifestLoader.swift
+
+https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/Sources/SourceInfo.swift
+
+
+
 
 Since this is an Electron app, I apologize about the 190 MB+ size. 
 
