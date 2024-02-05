@@ -28,9 +28,10 @@ Go to the [Releases](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/
 
 ## So what is this app doing exactly....?
 
+
 macOS 14 Sonoma shipped with video wallpapers and screensavers akin to the Apple TV. These are video files hosted by Apple and referenced in `Library/Application Support/com.apple.idleassetsd/Customer` in several files. This application reads the appropriate files and then generates a list of the available video files to the host operating system and creates a pictorial list so users can download them.
 
-In theory, if Apple updates the OS to include new video wallpapers, this application should be able to automatically include them as long as the operating system has been updated.
+Realistically this could be a webpage with hardcoded URLs but I wanted it to work regardless of what Apple changes. In theory, if Apple updates the OS to include new video wallpapers or makes the URLs on a per-request or per-CPU ID basis, this application should be able to automatically include them as long as the operating system has been updated.
 
 The initial build took roughly 4+ hours, as I'd never built an electron application. For simplicity, this was built using vanilla JavaScript rather than a full-blown framework like React.
 
