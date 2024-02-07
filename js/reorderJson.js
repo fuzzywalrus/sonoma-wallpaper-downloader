@@ -1,3 +1,5 @@
+// Description: This function takes a JSON object and reorders the keys within the object. It sorts the 'subcategories' within each 'category' and the 'assets' based on the 'newLabel' key. It also moves the 'localizedDescriptionKey' to the top of each 'subcategory' and 'category'.
+
 const sortKeysAlphabetically = (obj, firstKey) => {
     const sortedObj = {};
     if (obj.hasOwnProperty(firstKey)) {

@@ -1,3 +1,5 @@
+// Description: This function takes a JSON object and sorts the 'subcategories' within each 'category' by 'localizedDescriptionKey'. It also sorts the 'assets' by 'newLabel' and adds the 'newLabel' key to each asset. The 'newLabel' is obtained from the 'references' object using the 'localizedNameKey' of each asset.
+
 const sortJson = (jsonData, references) => {
     jsonData.assets.forEach(asset => {  // Corrected this line
         const key = asset.localizedNameKey;

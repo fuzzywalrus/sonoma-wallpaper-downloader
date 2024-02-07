@@ -1,9 +1,11 @@
-// Apple JSON data
-//file:///Library/Application%20Support/com.apple.idleassetsd/Customer/entries.json
+// Description: This file is the main entry point for the Electron app. It fetches the required data from the local file system or the web, processes it, and then displays the list of links to download the assets. It also listens for update events from the main process and displays a message to the user when a new update is available.
+// Apple JSON data location
+// file:///Library/Application%20Support/com.apple.idleassetsd/Customer/entries.json
+
+
 let jsonData, references;
 
 const fs = require('fs').promises; // Use the promise-based version of fs
-const plist = require('plist');
 const bplistParser = require('bplist-parser');
 const { ipcRenderer } = require('electron');
 
@@ -36,14 +38,13 @@ const downloadProgress = require('./js/downloadProgress');
 
 downloadProgress();
 
-
-
 const localizedStrings = '/Library/Application Support/com.apple.idleassetsd/Customer/TVIdleScreenStrings.bundle/en.lproj/Localizable.nocache.strings';
 const entriesJson = 'file:///Library/Application%20Support/com.apple.idleassetsd/Customer/entries.json'
 
 // Fallbacks
 const fallbackLocalizedString = 'https://assets.codepen.io/168181/Localizable.nocache.strings';
 const fallbackEntriesJson = 'https://assets.codepen.io/168181/entries.json'; 
+
 
 async function readAndProcessData() {
     let parsedData;
@@ -113,7 +114,6 @@ async function readAndProcessData() {
 readAndProcessData();
 
 /// runtime
-
 function doallthethings() {
 	if (jsonData) {
 			// Call the function to sort the JSON data
@@ -128,6 +128,3 @@ function doallthethings() {
 
 }
 doallthethings();
-
-
-

@@ -1,3 +1,5 @@
+// Description: This function takes a JSON object and creates a list of links to download the assets. It uses the newLabel if available, otherwise falls back to accessibilityLabel. It also uses the 4K-SDR-240FPS URL and the previewImage URL to create a link with an image and text. The list is then appended to the links container in the HTML.
+
 const createLinksList = (jsonData) => {
     const assets = jsonData.assets;
     const linksContainer = document.getElementById('links');
@@ -10,7 +12,6 @@ const createLinksList = (jsonData) => {
 
         // Use label from references if available, otherwise fall back to accessibilityLabel
         const label = asset.newLabel || asset.accessibilityLabel;
-
 
         const url = asset['url-4K-SDR-240FPS'];
         const previewImage = asset.previewImage;

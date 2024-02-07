@@ -1,4 +1,4 @@
-// main.js
+// Description: This file is the main entry point for the Electron app. It fetches the required data from the local file system or the web, processes it, and then displays the list of links to download the assets. It also listens for update events from the main process and displays a message to the user when a new update is available.
 
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, session, ipcMain } = require('electron')

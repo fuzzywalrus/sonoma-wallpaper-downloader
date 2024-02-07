@@ -1,3 +1,4 @@
+// Description: This function listens for the download-progress event from the main process and updates the UI with the download progress. It also triggers a fade-out effect when the download is complete.
 
 const downloadProgress = () => {
     ipcRenderer.on('download-progress', (event, receivedBytes, totalBytes) => {
