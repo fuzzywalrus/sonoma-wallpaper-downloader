@@ -1,0 +1,286 @@
+/* macOS-inspired styling */
+:root {
+  --macos-background: #f5f5f7;
+  --macos-surface: #ffffff;
+  --macos-text: #1d1d1f;
+  --macos-text-secondary: #86868b;
+  --macos-accent: #0071e3;
+  --macos-accent-hover: #0077ed;
+  --macos-border: #d2d2d7;
+  --macos-shadow: rgba(0, 0, 0, 0.1);
+  --macos-radius: 8px;
+  --macos-transition: all 0.2s ease;
+}
+
+/* Apply system fonts */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  background-color: var(--macos-background);
+  color: var(--macos-text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+p {
+  color: var(--macos-text-secondary);
+  font-size: 14px;
+  margin-top: 0;
+}
+
+/* Progress bar - similar to macOS progress indicators */
+.progress-container {
+  margin: 10px 0 20px 0;
+  position: relative;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: var(--macos-accent);
+  border-radius: 3px;
+  transition: width 0.3s ease, opacity 0.5s ease-out;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: var(--macos-text-secondary);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.progress-bar.fade-out {
+  opacity: 0;
+}
+
+/* Download list - grid layout similar to Finder */
+.download-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  list-style-type: none;
+  padding: 0;
+  margin: 24px 0;
+}
+
+/* Download item - mimics macOS document/file style */
+.download-item {
+  background-color: var(--macos-surface);
+  border-radius: var(--macos-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 10px var(--macos-shadow);
+  transition: var(--macos-transition);
+  border: 1px solid var(--macos-border);
+}
+
+.download-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.download-item a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--macos-text);
+  height: 100%;
+}
+
+.download-item img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--macos-border);
+}
+
+/* Image container for hover effects */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Download overlay */
+.download-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.download-overlay svg {
+  color: white;
+  width: 32px;
+  height: 32px;
+}
+
+.download-item span {
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Update notification - similar to macOS notification style */
+.update-notification {
+  background-color: var(--macos-surface);
+  border-radius: var(--macos-radius);
+  padding: 16px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px var(--macos-shadow);
+  border: 1px solid var(--macos-border);
+  animation: slideIn 0.3s ease-out;
+}
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notification-header svg {
+  color: var(--macos-accent);
+  margin-right: 8px;
+}
+
+.notification-header span {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.update-notification p {
+  margin: 0 0 14px 0;
+  color: var(--macos-text);
+}
+
+.update-notification .buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* macOS-style buttons */
+button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--macos-transition);
+  border: none;
+  background: none;
+}
+
+.update-notification .confirm-button {
+  background-color: var(--macos-accent);
+  color: white;
+}
+
+.update-notification .confirm-button:hover {
+  background-color: var(--macos-accent-hover);
+}
+
+.update-notification .cancel-button {
+  color: var(--macos-text);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.update-notification .cancel-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* App header styling */
+.app-header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--macos-border);
+}
+
+/* Create a subtle toolbar effect */
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--macos-border);
+}
+
+.toolbar button {
+  margin-right: 8px;
+  background-color: transparent;
+  border: 1px solid var(--macos-border);
+  border-radius: 4px;
+}
+
+.toolbar button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .download-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .app-header h3 {
+    font-size: 18px;
+  }
+}
+
+/* Subtle animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(0, 113, 227, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0);
+  }
+}
+
+/* For highlighting new items */
+.download-item.new {
+  animation: pulse 2s infinite;
+}

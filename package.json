@@ -1,50 +1,71 @@
 {
-  "name": "sonoma-wallpapers",
-  "version": "1.0.3",
-  "description": "A simple app that allows user to download the Sonoma Video Wallpapers.",
-  "main": "main.js",
+  "name": "macos-sonoma-video-downloader",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/electron/main.js",
+  "homepage": "./",
+  "author": "Your Name",
+  "description": "macOS Sonoma Video Downloader",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "build": "electron-builder"
-  },
-  "author": "Greg Gant",
-  "license": "ISC",
-  "devDependencies": {
-    "electron": "^28.2.0",
-    "electron-builder": "^24.9.1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron:dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .\"",
+    "electron:build": "npm run build && electron-builder",
+    "release": "npm run build && electron-builder --publish=always"
   },
   "dependencies": {
-    "@electron/notarize": "^2.2.1",
     "bplist-parser": "^0.3.2",
-    "electron-log": "^5.1.0",
-    "electron-updater": "^6.1.7",
-    "plist": "^3.1.0"
+    "electron-log": "^4.4.8",
+    "electron-updater": "^6.1.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fuzzywalrus/sonoma-wallpaper-downloader"
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "cross-env": "^7.0.3",
+    "electron": "^26.2.0",
+    "electron-builder": "^24.6.4",
+    "wait-on": "^7.0.1"
   },
   "build": {
-    "mac": {
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
-      "target": [
-        {
-          "target": "default",
-          "arch": [
-            "universal"
-          ]
-        }
-      ]
+    "appId": "com.yourdomain.macossonoma-downloader",
+    "productName": "macOS Sonoma Video Downloader",
+    "files": [
+      "build/**/*",
+      "src/electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
     },
-    "afterSign": "scripts/notarize.js",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": ["dmg"]
+    },
     "publish": {
       "provider": "github",
-      "owner": "fuzzywalrus",
-      "repo": "sonoma-wallpaper-downloader"
+      "owner": "your-github-username",
+      "repo": "macos-sonoma-video-downloader"
     }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
