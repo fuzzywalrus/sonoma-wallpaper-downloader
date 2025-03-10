@@ -1,3 +1,14 @@
+# macOS Sonoma Video Downloader
+
+A React + Electron application for downloading macOS Sonoma and above video wallpapers.
+
+## Features
+
+- Browse and preview available macOS Sonoma video wallpapers
+- Download wallpapers with progress tracking
+- Automatic updates via Electron's auto-updater
+- Works on macOS systems
+
 
 ![I made a video too](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/71fcb78d-e6c7-47e0-9c59-defc427fc787)
 
@@ -101,10 +112,43 @@ This very simplistic electron app builds a universal binary for ARM64/x86 Macs. 
 - OptionaL: Xcode developer tools installed on your Mac if you'd like to notarize the application.
 
 
-Run `npm install` to install the dependencies from the root directory of this program. 
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/macos-sonoma-video-downloader.git
+   cd macos-sonoma-video-downloader
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Start the development server:
+   ```
+   npm run electron:dev
+
 ## Dev
 
- `npm run dev` will trigger the development. Changes to `main.js` requires restarting the run dev.  If you'd like to use the inspect element within the environment, you'll need to unccomment or add `mainWindow.webContents.openDevTools()` in the main.js.
+ `npm run dev` will trigger the development. Changes to `main.js` requires restarting the run dev.  If you'd like to use the inspect element within the environment, you'll need to uncomment or add `mainWindow.webContents.openDevTools()` in the main.js.
+
+
+
+## Publishing Updates
+
+1. Update the version in `package.json`
+
+2. Build and publish:
+   ```
+   npm run release
+   ```
+
+ ## Technologies Used
+
+- React - Frontend UI framework
+- Electron - Desktop application framework
+- bplist-parser - For parsing Apple Property List files
+- electron-updater - For managing application updates
+
 
 ## Building
 
@@ -141,6 +185,9 @@ To disable notarization/signing, in the package JSON remove or comment out the f
 
 This probably doesn't need to be stated but.... DO NOT SHARE YOUR .ENV FILE ON YOUR OWN REPOSITORY. 
 
+
+The packaged application will be available in the `dist` directory.
+
 ## Misc Notes
 
 Updates land in:
@@ -153,3 +200,8 @@ The update log is in:
 
 Updates require signed code and the latest release yaml file to be part of the release to function properly.
 
+## Acknowledgements
+
+- Apple for the original wallpapers
+- Electron team for the desktop application framework
+- React team for the UI framework
