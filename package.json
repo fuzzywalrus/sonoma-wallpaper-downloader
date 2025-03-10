@@ -1,6 +1,6 @@
 {
   "name": "macos-sonoma-video-downloader",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "private": true,
   "main": "src/electron/main.js",
   "homepage": "./",
