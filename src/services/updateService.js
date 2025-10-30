@@ -1,6 +1,6 @@
 /**
  * Service to handle application updates
- * Only works in Electron environment
+ * Works in both Electron and Tauri environments
  */
 
 /**
@@ -8,14 +8,16 @@
  * @returns {Promise<boolean>} - Promise resolving to whether an update check was initiated
  */
 export const checkForUpdates = () => {
-  if (window.electron) {
-    // Simply send a message to the main process to check for updates
-    window.electron.send('check_for_updates');
+  const api = window.electron || window.tauri;
+
+  if (api) {
+    // Send a message to check for updates
+    api.send('check_for_updates');
     return Promise.resolve(true);
   }
-  
-  // Not in Electron environment
-  console.log('Update checking is only available in Electron environment');
+
+  // Not in desktop environment
+  console.log('Update checking is only available in desktop environment');
   return Promise.resolve(false);
 };
 
@@ -24,13 +26,15 @@ export const checkForUpdates = () => {
  * @returns {Promise<boolean>} - Promise resolving to whether restart was initiated
  */
 export const installUpdate = () => {
-  if (window.electron) {
-    window.electron.send('restart_app');
+  const api = window.electron || window.tauri;
+
+  if (api) {
+    api.send('restart_app');
     return Promise.resolve(true);
   }
-  
-  // Not in Electron environment
-  console.log('Update installation is only available in Electron environment');
+
+  // Not in desktop environment
+  console.log('Update installation is only available in desktop environment');
   return Promise.resolve(false);
 };
 
@@ -40,24 +44,26 @@ export const installUpdate = () => {
  * @param {Function} onUpdateDownloaded - Callback when update is downloaded
  */
 export const initUpdateListeners = (onUpdateAvailable, onUpdateDownloaded) => {
-  if (window.electron) {
-    // Set up listeners for update events from Electron main process
-    window.electron.receive('update_available', () => {
+  const api = window.electron || window.tauri;
+
+  if (api) {
+    // Set up listeners for update events
+    api.receive('update_available', () => {
       if (typeof onUpdateAvailable === 'function') {
         onUpdateAvailable();
       }
     });
 
-    window.electron.receive('update_downloaded', () => {
+    api.receive('update_downloaded', () => {
       if (typeof onUpdateDownloaded === 'function') {
         onUpdateDownloaded();
       }
     });
-    
+
     return true;
   }
-  
-  // Not in Electron environment
-  console.log('Update listeners are only available in Electron environment');
+
+  // Not in desktop environment
+  console.log('Update listeners are only available in desktop environment');
   return false;
 };

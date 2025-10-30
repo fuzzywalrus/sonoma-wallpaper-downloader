@@ -13,13 +13,10 @@
  */
 export const downloadFile = async (url, filename = '') => {
   try {
-    // Check if we're in Electron environment
-    if (window.electron) {
-      // In Electron, the main process handles downloads
-      // We don't need to do anything special here as Electron's
-      // session.on('will-download') will handle the download progress
-      
-      // Just navigate to the URL which will trigger the download
+    // Check if we're in Electron or Tauri environment
+    if (window.electron || window.tauri) {
+      // In Electron/Tauri, trigger download by navigating to URL
+      // The desktop app will handle the download automatically
       window.location.href = url;
       return true;
     } else {
@@ -28,13 +25,13 @@ export const downloadFile = async (url, filename = '') => {
       if (!response.ok) {
         throw new Error(`Failed to download: ${response.statusText}`);
       }
-      
+
       const blob = await response.blob();
-      
+
       // Create a temporary link element to trigger the download
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(blob);
-      
+
       // Use the provided filename or extract from the URL
       if (filename) {
         downloadLink.download = filename;
@@ -52,15 +49,15 @@ export const downloadFile = async (url, filename = '') => {
           downloadLink.download = urlParts[urlParts.length - 1];
         }
       }
-      
+
       // Trigger the download
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-      
+
       // Clean up the object URL
       URL.revokeObjectURL(downloadLink.href);
-      
+
       return true;
     }
   } catch (error) {

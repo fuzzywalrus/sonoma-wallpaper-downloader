@@ -11,11 +11,20 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "tauri": ". \"$HOME/.cargo/env\" && tauri",
+    "tauri:dev": ". \"$HOME/.cargo/env\" && tauri dev",
+    "tauri:build": ". \"$HOME/.cargo/env\" && tauri build",
+    "tauri:build:universal": ". \"$HOME/.cargo/env\" && tauri build --target universal-apple-darwin",
     "electron:dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .\"",
     "electron:build": "npm run build && electron-builder",
     "release": "npm run build && electron-builder --publish=always"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2",
+    "@tauri-apps/plugin-http": "^2",
+    "@tauri-apps/plugin-process": "^2",
+    "@tauri-apps/plugin-updater": "^2",
     "bplist-parser": "^0.3.2",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",
@@ -24,6 +33,7 @@
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.9.2",
     "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",
     "electron": "^26.2.0",
