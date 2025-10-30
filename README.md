@@ -1,13 +1,13 @@
-# macOS Sonoma Video Downloader
+# macOS Video Downloader
 
-A React + Electron application for downloading macOS Sonoma and above video wallpapers.
+A React + Electron application for downloading macOS video wallpapers (Sonoma and above).
 
 ## Features
 
-- Browse and preview available macOS Sonoma video wallpapers
+- Browse and preview available macOS video wallpapers
 - Download wallpapers with progress tracking
 - Automatic updates via Electron's auto-updater
-- Works on macOS systems
+- Works on macOS systems (Sonoma and above)
 
 
 ![I made a video too](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/71fcb78d-e6c7-47e0-9c59-defc427fc787)
@@ -15,7 +15,7 @@ A React + Electron application for downloading macOS Sonoma and above video wall
 [Watch the YouTube video](https://www.youtube.com/watch?v=D6yynEDJ5gI)
 
 
-I took inspiration from https://github.com/mikeswanson/WallGet, which is a Wallpaper downloader for macOS Sonoma that uses a Python script to trigger downloading all of the macOS Sonoma video wallpapers.
+I took inspiration from https://github.com/mikeswanson/WallGet, which is a Wallpaper downloader for macOS Sonoma that uses a Python script to trigger downloading all of the macOS video wallpapers.
 
 <img width="1520" alt="Screenshot 2024-01-26 at 12 32 18 AM" src="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/e0749462-b6e2-45b2-9897-cf977ffe4fc6">
 

@@ -60,7 +60,7 @@ const createWindow = () => {
   });
 
   // In development, load from React dev server
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
+  if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:3000');
     mainWindow.webContents.openDevTools();
   } else {

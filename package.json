@@ -5,7 +5,7 @@
   "main": "src/electron/main.js",
   "homepage": "./",
   "author": "Your Name",
-  "description": "macOS Sonoma Video Downloader",
+  "description": "macOS Video Downloader",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -32,7 +32,7 @@
   },
   "build": {
     "appId": "com.yourdomain.macossonoma-downloader",
-    "productName": "macOS Sonoma Video Downloader",
+    "productName": "macOS Video Downloader",
     "files": [
       "build/**/*",
       "src/electron/**/*"
