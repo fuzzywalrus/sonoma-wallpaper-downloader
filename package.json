@@ -40,9 +40,19 @@
     "directories": {
       "buildResources": "assets"
     },
+    "extraMetadata": {
+      "main": "src/electron/main.js"
+    },
+    "icon": "public/icon.png",
     "mac": {
       "category": "public.app-category.utilities",
-      "target": ["dmg"]
+      "icon": "public/icon.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": "universal"
+        }
+      ]
     },
     "publish": {
       "provider": "github",
