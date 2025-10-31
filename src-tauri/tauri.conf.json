@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "macOS Video Downloader",
-  "version": "1.0.4",
-  "identifier": "com.yourdomain.macossonoma-downloader",
+  "version": "1.0.5",
+  "identifier": "com.greggant.svd",
   "build": {
     "frontendDist": "../build",
     "devUrl": "http://localhost:3000",
@@ -39,18 +39,18 @@
       "minimumSystemVersion": "14.0",
       "frameworks": [],
       "exceptionDomain": "",
-      "signingIdentity": null,
-      "providerShortName": null,
+      "signingIdentity": "Developer ID Application: Greg Gant (36SA478KNK)",
+      "providerShortName": "36SA478KNK",
       "entitlements": "entitlements.plist"
     },
-    "publisher": "Your Name",
+    "publisher": "Greg Gant",
     "category": "Utility"
   },
   "plugins": {
     "updater": {
       "active": true,
       "endpoints": [
-        "https://github.com/your-github-username/macos-sonoma-video-downloader/releases/latest/download/latest.json"
+        "https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases/latest/download/latest.json"
       ],
       "dialog": true,
       "pubkey": ""

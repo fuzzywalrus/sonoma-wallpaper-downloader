@@ -1,6 +1,6 @@
 {
   "name": "macos-sonoma-video-downloader",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "main": "src/electron/main.js",
   "homepage": "./",
@@ -15,6 +15,7 @@
     "tauri:dev": ". \"$HOME/.cargo/env\" && tauri dev",
     "tauri:build": ". \"$HOME/.cargo/env\" && tauri build",
     "tauri:build:universal": ". \"$HOME/.cargo/env\" && tauri build --target universal-apple-darwin",
+    "build:sign": "./build-and-sign.sh",
     "electron:dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .\"",
     "electron:build": "npm run build && electron-builder",
     "release": "npm run build && electron-builder --publish=always"

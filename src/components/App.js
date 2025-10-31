@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DownloadList from './DownloadList';
 import ProgressBar from './ProgressBar';
 import UpdateNotification from './UpdateNotification';
+import MigrationNotice from './MigrationNotice';
 // Make sure this import matches the export in dataService.js
 import { fetchAndProcessData } from '../services/dataService';
 import { initUpdateListeners, installUpdate } from '../services/updateService';
@@ -63,30 +64,45 @@ const App = () => {
     installUpdate();
   };
 
+  // Check if running on Electron (migration notice only for Electron users)
+  const isElectron = window.electron && !window.tauri;
+
   return (
     <div className="container">
       <div className="app-header">
         <h3>macOS Sonoma Wallpapers</h3>
         <p>Download beautiful video backgrounds for your desktop</p>
       </div>
-      
+
+      {/* Show migration notice only for Electron users */}
+      {isElectron && <MigrationNotice />}
+
       {isDownloading && <ProgressBar progress={progress} />}
-      
+
       {updateAvailable && (
-        <UpdateNotification 
-          message="A new update is available. Downloading now..." 
+        <UpdateNotification
+          message="A new update is available. Downloading now..."
         />
       )}
-      
+
       {updateDownloaded && (
-        <UpdateNotification 
-          message="A new update has been downloaded. Would you like to restart the app to install the update now?" 
+        <UpdateNotification
+          message="A new update has been downloaded. Would you like to restart the app to install the update now?"
           confirmButton={true}
           onConfirm={handleRestartApp}
         />
       )}
-      
+
       <DownloadList assets={assets} />
+
+      <footer className="app-footer">
+        <p>
+          macOS Video Downloader v1.0.5 | Created by{' '}
+          <a href="https://greggant.com" target="_blank" rel="noopener noreferrer">
+            Greg Gant
+          </a>
+        </p>
+      </footer>
     </div>
   );
 };
