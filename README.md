@@ -1,12 +1,12 @@
 # macOS Video Downloader
 
-A React + Electron application for downloading macOS video wallpapers (Sonoma and above).
-
+A React + Tarui application for downloading macOS video wallpapers (Sonoma and above).
+cl
 ## Features
 
 - Browse and preview available macOS video wallpapers
 - Download wallpapers with progress tracking
-- Automatic updates via Electron's auto-updater
+- Automatic updates via Tauri's auto-updater
 - Works on macOS systems (Sonoma and above)
 
 
@@ -46,6 +46,8 @@ Realistically this could be a webpage with hardcoded URLs but I wanted it to wor
 
 The initial build took roughly 4+ hours, as I'd never built an electron application. For simplicity, this was built using vanilla JavaScript rather than a full-blown framework like React. Ironically, getting notarization working took many many more hours thanks to the pain of Apple's developer portal and my own ignorance around auto-updates requiring signed code.
 
+It has now been ported to Tauri + React to reduce the application size from 190MB+ to about 13MB.
+
 
 ### Future release plans
 
@@ -68,10 +70,6 @@ https://github.com/JohnCoates/Aerial/blob/master/Resources/Community/en.json
 https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/ManifestLoader.swift
 
 https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/Sources/SourceInfo.swift
-
-I also may move this to React and try caching the images.
-
-Since this is an Electron app, I apologize about the 190 MB+ size. 
 
 
 # Troubleshooting / FAQ
@@ -98,11 +96,11 @@ These files were produced by Apple or licensed by Apple. I'd _highly_ recommend 
 
 No. There are applications that do offer alternatives to Apple's screen savers and wallpapers. I've investigated letting users customize videos and in my very quick surface test, it doesn't appear that it is editable without going into the SQLlite database. A portion the DB is encrypted. 
 
-If you're a developer, you may want to poke around yourself in `Library/Application Support/com.apple.idleassetsd/`. I am not a macOS developer by trade, hence why this is written in the bloatware known as Electron.
+If you're a developer, you may want to poke around yourself in `Library/Application Support/com.apple.idleassetsd/`. 
 
 # Developers
 
-This very simplistic electron app builds a universal binary for ARM64/x86 Macs. The `main.js` is used for the Electron layer and app.js is used for inside the app. Main.js. There isn't much use of IPC communication in this app beyond the auto-updating.
+This very simplistic Tauri app builds a universal binary for ARM64/x86 Macs. 
 
 ## Setup 
 
@@ -125,12 +123,10 @@ This very simplistic electron app builds a universal binary for ARM64/x86 Macs. 
 
 3. Start the development server:
    ```
-   npm run electron:dev
-
+ npm run tauri:dev 
 ## Dev
 
- `npm run dev` will trigger the development. Changes to `main.js` requires restarting the run dev.  If you'd like to use the inspect element within the environment, you'll need to uncomment or add `mainWindow.webContents.openDevTools()` in the main.js.
-
+ ` npm run tauri:dev ` will trigger the development environment.
 
 
 ## Publishing Updates
@@ -145,9 +141,9 @@ This very simplistic electron app builds a universal binary for ARM64/x86 Macs. 
  ## Technologies Used
 
 - React - Frontend UI framework
-- Electron - Desktop application framework
+- Tauri - Desktop application framework
 - bplist-parser - For parsing Apple Property List files
-- electron-updater - For managing application updates
+- tauri-plugin-update - For managing application updates
 
 
 ## Building
@@ -156,52 +152,16 @@ You'll need to create a .env file or disable signing.
 
 If you have a valid Apple Developer account, you should be able to create an Apple App password in the Apple Accounts Portal, and in the Apple Developer Portal an App ID. The env file should look the following for building with notarization. 
 
-Place the .env file in the root of the project with the following information (replace the values with your own information).
+See the example .env.example file for reference.
 
-```
-DEBUG=electron-notarize*
-APPLEID=your@email.com
-APPLEIDPASS=your-apple-pass  
-```
-
-I followed this blog post for app signing; by followed, I mean I copied, besides updating the to the correct repos and using a .ENV rather than keychains. 
- 
-https://www.funtoimagine.com/blog/electron-mac-sign-and-notarize/
-
-
-`npm run build`
-
-To disable notarization/signing, in the package JSON remove or comment out the following:
-
-```
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
-...
-     "afterSign": "scripts/notarize.js",
-
-```
-
-This probably doesn't need to be stated but.... DO NOT SHARE YOUR .ENV FILE ON YOUR OWN REPOSITORY. 
 
 
 The packaged application will be available in the `dist` directory.
 
 ## Misc Notes
 
-Updates land in:
-
-`~/Library/Caches/sonoma-wallpapers-updater/`
-
-The update log is in:
-
-`~/Library/Logs/sonoma-wallpapers/main.log`
-
-Updates require signed code and the latest release yaml file to be part of the release to function properly.
-
 ## Acknowledgements
 
 - Apple for the original wallpapers
-- Electron team for the desktop application framework
-- React team for the UI framework
+- Tauri team for the desktop application framework
+- Mike Swanson for the original WallGet project
