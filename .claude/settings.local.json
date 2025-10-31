@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Bash(npm run electron:build:*)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(rustc:*)",
+      "Bash(curl:*)",
+      "Bash(sh -s -- -y)",
+      "Bash(. \"$HOME/.cargo/env\")",
+      "Bash(cargo install:*)",
+      "Bash(cargo tauri init:*)",
+      "Bash(cargo tauri icon:*)",
+      "Bash(cargo check:*)",
+      "Bash(rustup target list:*)",
+      "Bash(rustup target add:*)",
+      "Bash(npm run tauri:build:universal:*)"
     ],
     "deny": [],
     "ask": []

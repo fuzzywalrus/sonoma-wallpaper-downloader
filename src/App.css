@@ -284,3 +284,111 @@ button {
 .download-item.new {
   animation: pulse 2s infinite;
 }
+
+/* App footer */
+.app-footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--macos-border);
+  text-align: center;
+}
+
+.app-footer p {
+  font-size: 12px;
+  color: var(--macos-text-secondary);
+  margin: 0;
+}
+
+.app-footer a {
+  color: var(--macos-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--macos-transition);
+}
+
+.app-footer a:hover {
+  color: var(--macos-accent-hover);
+  text-decoration: underline;
+}
+
+/* Migration Notice */
+.migration-notice {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: var(--macos-radius);
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  animation: slideIn 0.5s ease-out;
+}
+
+.migration-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.migration-header svg {
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.migration-content {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.migration-content p {
+  color: white;
+  margin: 12px 0;
+}
+
+.migration-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.migration-content li {
+  padding: 8px 0;
+  font-size: 15px;
+}
+
+.migration-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.migration-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--macos-transition);
+  border: none;
+  flex: 1;
+}
+
+.migration-button.primary {
+  background-color: white;
+  color: #667eea;
+}
+
+.migration-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.migration-button.secondary {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.migration-button.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
