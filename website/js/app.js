@@ -250,8 +250,6 @@ var initVideoPixelAssembly = function () {
         canvas.remove();
         stage.style.overflow = ''; // restore overflow: hidden for border-radius clipping
         video.classList.add('video-reveal-visible');
-        video.currentTime = 0;
-        video.play();
     };
 
     var frame = function (now) {
@@ -284,7 +282,6 @@ var initVideoPixelAssembly = function () {
 
     var setup = function () {
         if (ended || rafId) return;
-        video.pause();
         resizeCanvas();
         // Allow canvas to extend beyond the stage while animation plays
         stage.style.overflow = 'visible';
