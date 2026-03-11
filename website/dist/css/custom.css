@@ -62,9 +62,55 @@ body .col {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+/* Inner content headings (e.g. Troubleshooting / FAQ) */
+.content h1 {
+    font-size: 32px;
+    margin-top: 40px;
+}
 video {
     border-radius: 10px;
     margin-bottom: 30px;
+}
+
+.video-reveal-stage {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.video-reveal-stage > video {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.video-reveal-target {
+    opacity: 0;
+}
+
+.video-reveal-target.video-reveal-visible {
+    opacity: 1;
+}
+
+.video-particle-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .video-reveal-target {
+        opacity: 1;
+    }
 }
 
 img {
