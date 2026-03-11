@@ -1,6 +1,6 @@
 # Release Checklist v1.1.0
 
-## ✅ Pre-Release (Completed)
+## Pre-Release (Completed)
 
 - [x] Updated version to 1.1.0 in all files
   - [x] package.json
@@ -17,14 +17,14 @@
   - [x] Tauri version (13 MB, signed & notarized)
   - [x] Electron version (192 MB, with migration notice)
 
-## 📦 Release Files
+## Release Files
 
 ### Tauri Version (Recommended)
 ```
 File: Mac Video Wallpaper Manager_1.1.0_universal.dmg
 Location: src-tauri/target/universal-apple-darwin/release/bundle/dmg/
 Size: ~13 MB
-Status: ✅ Signed ✅ Notarized ✅ Stapled
+Status: Signed Notarized Stapled
 Architectures: Intel (x86_64) + Apple Silicon (ARM64)
 ```
 
@@ -33,12 +33,12 @@ Architectures: Intel (x86_64) + Apple Silicon (ARM64)
 File: Mac Video Wallpaper Manager-1.1.0-universal.dmg
 Location: dist/
 Size: ~192 MB
-Status: ✅ Signed ⚠️ Not notarized (optional)
+Status: Signed ⚠️ Not notarized (optional)
 Architectures: Universal
 Purpose: Auto-update from v1.0.4, shows migration banner
 ```
 
-## 🚀 Release Steps
+## Release Steps
 
 ### 1. Create GitHub Release
 
@@ -52,7 +52,7 @@ Purpose: Auto-update from v1.0.4, shows migration banner
 ```markdown
 # Mac Video Wallpaper Manager v1.1.0
 
-## 🎉 Major Update: Migrated to Tauri!
+## Major Update: Migrated to Tauri!
 
 This release marks a complete rewrite using modern Tauri framework.
 
@@ -64,7 +64,7 @@ This release marks a complete rewrite using modern Tauri framework.
 - **Universal Binary**: Works on Intel and Apple Silicon Macs
 - **Footer**: Now shows version and link to greggant.com
 
-### 📥 Downloads
+### Downloads
 
 **🔹 New Users - Download This:**
 - **Mac Video Wallpaper Manager_1.1.0_universal.dmg** (Tauri - Recommended)
@@ -96,7 +96,7 @@ If you're currently using v1.0.4:
 **Size**: Reduced from 190 MB to 13 MB
 **Performance**: Significantly faster and more efficient
 
-### 📊 Comparison
+### Comparison
 
 | Feature | Electron (Old) | Tauri (New) |
 |---------|---------------|-------------|
@@ -128,9 +128,9 @@ See [RELEASE_NOTES_1.1.0.md](https://github.com/fuzzywalrus/sonoma-wallpaper-dow
 ```
 
 5. **Upload Files**:
-   - ✅ `Mac Video Wallpaper Manager_1.1.0_universal.dmg` (Tauri - from src-tauri/target/)
-   - ✅ `Mac Video Wallpaper Manager-1.1.0-universal.dmg` (Electron - from dist/)
-   - ✅ `latest-mac.yml` (if exists in dist/ - for Electron auto-update)
+   - `Mac Video Wallpaper Manager_1.1.0_universal.dmg` (Tauri - from src-tauri/target/)
+   - `Mac Video Wallpaper Manager-1.1.0-universal.dmg` (Electron - from dist/)
+   - `latest-mac.yml` (if exists in dist/ - for Electron auto-update)
 
 6. **Check "Set as the latest release"**
 
@@ -150,8 +150,8 @@ Download the latest version from [GitHub Releases](https://github.com/fuzzywalru
 ## Features
 
 - 🎯 13 MB lightweight application (93% smaller than before!)
-- 🚀 Built with Tauri for maximum performance
-- ✨ Universal binary - works on Intel and Apple Silicon Macs
+- Built with Tauri for maximum performance
+- Universal binary - works on Intel and Apple Silicon Macs
 - ... (rest of features)
 ```
 
@@ -169,18 +169,18 @@ Download the latest version from [GitHub Releases](https://github.com/fuzzywalru
 - Use `latest.json` for Tauri auto-updates
 - Remove Electron support
 
-## 📊 Download Statistics to Monitor
+## Download Statistics to Monitor
 
 Track which version users are downloading:
 - If Tauri downloads > 90%, can deprecate Electron
 - Check GitHub Insights → Traffic → Popular content
 
-## 🐛 Known Issues
+## Known Issues
 
 - ⚠️ Electron version shows DMG name as "(Download me)" - harmless, just cosmetic
 - ⚠️ One-time manual upgrade required for existing users
 
-## ✅ Testing Checklist
+## Testing Checklist
 
 - [x] Tauri version launches without warnings
 - [x] Electron version shows migration banner
@@ -191,7 +191,7 @@ Track which version users are downloading:
 - [x] Notarization verified (Tauri)
 - [x] Gatekeeper approves (Tauri)
 
-## 📞 Support
+## Support
 
 If users have issues:
 1. Direct them to the Tauri version (recommended)
@@ -201,4 +201,4 @@ If users have issues:
 
 ---
 
-**Ready to release!** 🚀
+**Ready to release!** 

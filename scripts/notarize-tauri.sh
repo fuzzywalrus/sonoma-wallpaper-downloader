@@ -11,14 +11,14 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🔐 Tauri App Notarization Script${NC}"
+echo -e "${BLUE} Tauri App Notarization Script${NC}"
 echo ""
 
 # Load environment variables
 if [ -f .env ]; then
     # shellcheck disable=SC2046
     export $(grep -v '^#' .env | xargs)
-    echo -e "${GREEN}✅ Loaded .env file${NC}"
+    echo -e "${GREEN} Loaded .env file${NC}"
 else
     echo -e "${RED}❌ .env file not found. Please create it with your Apple credentials.${NC}"
     echo "See .env.example for the template"
@@ -41,7 +41,7 @@ if [ ! -f "$DMG_PATH" ]; then
     exit 1
 fi
 
-echo -e "${BLUE}📦 Found DMG: $DMG_PATH${NC}"
+echo -e "${BLUE} Found DMG: $DMG_PATH${NC}"
 echo ""
 
 # Submit for notarization
@@ -54,17 +54,17 @@ xcrun notarytool submit "$DMG_PATH" \
 
 # Check if notarization was successful
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ Notarization successful!${NC}"
+    echo -e "${GREEN} Notarization successful!${NC}"
     echo ""
 
     # Staple the notarization ticket
-    echo -e "${BLUE}📎 Stapling notarization ticket...${NC}"
+    echo -e "${BLUE} Stapling notarization ticket...${NC}"
     xcrun stapler staple "$DMG_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "${GREEN}✅ Notarization ticket stapled!${NC}"
+        echo -e "${GREEN} Notarization ticket stapled!${NC}"
         echo ""
-        echo -e "${GREEN}🎉 Your app is now notarized and ready for distribution!${NC}"
+        echo -e "${GREEN} Your app is now notarized and ready for distribution!${NC}"
         echo ""
         echo "DMG location: $DMG_PATH"
     else
@@ -83,4 +83,4 @@ echo -e "${BLUE}🔍 Verifying notarization...${NC}"
 spctl -a -vvv -t install "$DMG_PATH"
 
 echo ""
-echo -e "${GREEN}✅ All done!${NC}"
+echo -e "${GREEN} All done!${NC}"

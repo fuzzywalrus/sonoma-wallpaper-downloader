@@ -1,5 +1,7 @@
 use std::fs;
 use std::path::Path;
+use tauri::menu::{Menu, MenuItem, PredefinedMenuItem, Submenu};
+use tauri::Emitter;
 
 /// Read a file from the filesystem
 #[tauri::command]
@@ -62,6 +64,7 @@ async fn parse_bplist(buffer: Vec<u8>) -> Result<serde_json::Value, String> {
 }
 
 #[derive(serde::Serialize)]
+#[serde(rename_all = "camelCase")]
 struct ScreensaverFile {
     path: String,
     name: String,
@@ -163,8 +166,25 @@ async fn delete_screensaver(target_path: String) -> Result<bool, String> {
         return Err("Refusing to delete non-video file".into());
     }
 
-    fs::remove_file(target).map_err(|e| format!("Failed to delete file: {e}"))?;
-    Ok(true)
+    // Try a direct delete first (works if the app already has write permission).
+    if fs::remove_file(target).is_ok() {
+        return Ok(true);
+    }
+
+    // Files in the Customer directory are owned by the _assetsd system user.
+    // A normal user-space process cannot unlink them even with Full Disk Access
+    // granted in TCC, because FDA bypasses TCC restrictions but not POSIX
+    // ownership. Fall back to osascript with administrator privileges, which
+    // presents the native macOS password prompt.
+    let escaped = target_path.replace('\'', "'\\''"); // single-quote escape for shell
+    let script = format!("do shell script \"rm -f '{escaped}'\" with administrator privileges");
+    let output = std::process::Command::new("osascript")
+        .arg("-e")
+        .arg(&script)
+        .output()
+        .map_err(|e| format!("osascript failed: {e}"))?;
+
+    Ok(output.status.success())
 }
 
 #[tauri::command]
@@ -207,6 +227,36 @@ pub fn run() {
             .build(),
         )?;
       }
+
+      // Build a custom app menu so the name reads "Mac Video Wallpaper Manager"
+      // instead of the Cargo binary name "macos-video-downloader".
+      let about_item = MenuItem::with_id(app, "show_about", "About Mac Video Wallpaper Manager", true, None::<&str>)?;
+      let app_submenu = Submenu::with_items(
+        app,
+        "Mac Video Wallpaper Manager",
+        true,
+        &[
+          &about_item,
+          &PredefinedMenuItem::separator(app)?,
+          &PredefinedMenuItem::services(app, None)?,
+          &PredefinedMenuItem::separator(app)?,
+          &PredefinedMenuItem::hide(app, None)?,
+          &PredefinedMenuItem::hide_others(app, None)?,
+          &PredefinedMenuItem::show_all(app, None)?,
+          &PredefinedMenuItem::separator(app)?,
+          &PredefinedMenuItem::quit(app, None)?,
+        ],
+      )?;
+      let menu = Menu::with_items(app, &[&app_submenu])?;
+      app.set_menu(menu)?;
+
+      // Emit a frontend event when the About menu item is clicked.
+      app.on_menu_event(|app, event| {
+        if event.id() == "show_about" {
+          app.emit("show-about", ()).unwrap();
+        }
+      });
+
       Ok(())
     })
     .invoke_handler(tauri::generate_handler![

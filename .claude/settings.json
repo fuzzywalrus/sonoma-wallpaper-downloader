@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ffprobe -v quiet -print_format json -show_streams /Users/greg/Development/sonoma-wallpaper-downloader/public/permissions.mov)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(s.get\\(''''codec_name''''\\), s.get\\(''''codec_type''''\\)\\) for s in d.get\\(''''streams'''',[]\\)]\")",
+      "Bash(mdls /Users/greg/Development/sonoma-wallpaper-downloader/public/permissions.mov)"
+    ]
+  }
+}

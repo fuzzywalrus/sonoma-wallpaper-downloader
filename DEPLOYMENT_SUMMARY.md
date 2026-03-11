@@ -1,15 +1,15 @@
-# 🎉 Deployment Summary - v1.1.0
+# Deployment Summary - v1.1.0
 
-## ✅ Complete! Ready for Release
+## Complete! Ready for Release
 
 You now have a **single Tauri build** of v1.1.0 ready to deploy:
 
-### 📦 Tauri Build
+### Tauri Build
 ```
 File: Mac Video Wallpaper Manager_1.1.0_universal.dmg
 Location: src-tauri/target/universal-apple-darwin/release/bundle/dmg/
 Size: 13 MB (93% smaller!)
-Status: ✅ Signed ✅ Notarized ✅ Stapled ✅ Gatekeeper Approved
+Status: Signed Notarized Stapled Gatekeeper Approved
 ```
 
 **Features:**
@@ -19,7 +19,7 @@ Status: ✅ Signed ✅ Notarized ✅ Stapled ✅ Gatekeeper Approved
 - Footer with version and greggant.com link
 - macOS Sonoma 14.0+ required
 
-## 🚀 Quick Start - Upload to GitHub
+## Quick Start - Upload to GitHub
 
 ### Step 1: Create Release
 ```bash
@@ -37,7 +37,7 @@ Status: ✅ Signed ✅ Notarized ✅ Stapled ✅ Gatekeeper Approved
 
 Check "Set as the latest release" and publish!
 
-## 📊 What Happens Next
+## What Happens Next
 
 ### For NEW Users:
 1. Download Tauri version
@@ -72,18 +72,18 @@ npm run tauri:build:universal
 5. **`build-and-sign.sh`** - Automated build script
 6. **`DEPLOYMENT_SUMMARY.md`** - This file
 
-## ✨ What Was Added
+## What Was Added
 
 ### Code Changes:
-- ✅ Version updated to 1.1.0 everywhere
-- ✅ Added footer with greggant.com link
+- Version updated to 1.1.0 everywhere
+- Added footer with greggant.com link
 
 ### Infrastructure:
-- ✅ Automated build script with notarization
-- ✅ Comprehensive documentation
-- ✅ Release checklist
+- Automated build script with notarization
+- Comprehensive documentation
+- Release checklist
 
-## 📈 Statistics
+## Statistics
 
 | Metric | Before | After | Improvement |
 |--------|---------|-------|-------------|
@@ -100,7 +100,7 @@ npm run tauri:build:universal
 - [x] Automated build script works
 - [x] Documentation complete
 
-## 🚦 Next Steps
+## Next Steps
 
 1. **Upload to GitHub** (see Step 1-3 above)
 2. **Test downloads** from GitHub
@@ -108,7 +108,7 @@ npm run tauri:build:universal
 4. **Respond to issues** if any arise
 5. **Plan v1.2.0** (future Tauri updates)
 
-## 💡 Tips
+## Tips
 
 ### Testing the Tauri build:
 ```bash
@@ -129,12 +129,12 @@ spctl -a -vvv -t install "src-tauri/target/.../Mac Video Wallpaper Manager_1.1.0
 ## 🎊 Congratulations!
 
 You've successfully:
-- ✅ Shipped a lightweight Tauri-based app
-- ✅ Reduced app size by 93%
-- ✅ Set up automated code signing & notarization
-- ✅ Added professional footer with your branding
+- Shipped a lightweight Tauri-based app
+- Reduced app size by 93%
+- Set up automated code signing & notarization
+- Added professional footer with your branding
 
-**Ready to ship!** 🚀
+**Ready to ship!** 
 
 ---
 

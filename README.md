@@ -1,13 +1,16 @@
 # Mac Video Wallpaper Manager
 
-A React + Tarui application for downloading macOS video wallpapers (Sonoma and above).
-cl
+A Tauri + React application for browsing, downloading, and managing macOS video wallpapers (Sonoma and above).
+
 ## Features
 
-- Browse and preview available macOS video wallpapers
-- Download wallpapers with progress tracking
-- Automatic updates via Tauri's auto-updater
-- Works on macOS systems (Sonoma and above)
+- Two launch modes:
+  - **Download Screensavers** – browse, preview, and download individual macOS Sonoma video wallpapers.
+  - **Manage downloaded screensavers** – list all locally downloaded videos under `Library/Application Support/com.apple.idleassetsd/Customer`, see sizes, and optionally delete them.
+- HTML5 preview modal for each video.
+- Download progress tracking.
+- Signed & notarized universal binary (Intel + Apple Silicon).
+- Works on macOS Sonoma 14.0+ (may work on later versions if Apple keeps the same data format).
 
 
 ![I made a video too](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/assets/2363648/71fcb78d-e6c7-47e0-9c59-defc427fc787)
@@ -22,54 +25,45 @@ I took inspiration from https://github.com/mikeswanson/WallGet, which is a Wallp
 
 However, I wanted to do something a bit different and allow users to download the individual wallpapers and save them wherever they would like. Downloads may take several minutes, depending on your internet connection. Currently, there are about 130+ videos, totaling 65 GBs of videos. Apple has introduced more videos over time on the Apple TV and will likely add more for macOS as well in future OS releases. With any luck the format will stay the same under macOS and this app will work in future version of macOS.
 
+The app now features a new look and feel, and allows for removing the videos from the system if one so chooses to help manage disk space.
+
 ## Usage
 
-The app is now signed code and features auto-updates! Download from releases and double click to run!
+1. Download the latest `.dmg` from [Releases](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases).
+2. Drag **Mac Video Wallpaper Manager** into `Applications`.
+3. Launch the app.
+4. On first launch choose:
+   - **Download Screensavers** to use the original download experience, or
+   - **Manage downloaded screensavers** to see/delete videos already stored on disk.
+5. To manage existing files, grant the app **Full Disk Access** in  
+   `System Settings → Privacy & Security → Full Disk Access`, then relaunch the app.
 
 ## Pre macOS 14 notes
 
-Users on non-14.0+ will bounce to all the wallpapers released as of macOS 14.1.1 (23B81). It's important to note that the videos are 4k 240 FPS in HEVC. Older OSes may not support the video format. Older computesr may not be able to playback the video files.
+Users on non-14.0+ will bounce to all the wallpapers released as of macOS 14.1.1 (23B81). It's important to note that the videos are 4k 240 FPS in HEVC. Older OSes may not support the video format. Older computesr may not be able to playback the video files. T
 
 Click the image or title to trigger a download.
 
 
 ## Downloading the App
 
-Go to the [Releases](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases) and download either the ZIP or DMG file. It's a universal binary, so it'll work on both Apple Silicon and Intel Macs. 
+Go to the [Releases](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases) and download the latest `.dmg`.  
+The app is a universal binary, so it works on both Apple Silicon and Intel Macs.
 
 ## So what is this app doing exactly....?
 
 
 macOS 14 Sonoma shipped with video wallpapers and screensavers akin to the Apple TV. These are video files hosted by Apple and referenced in `Library/Application Support/com.apple.idleassetsd/Customer` in several files. This application reads the appropriate files and then generates a list of the available video files to the host operating system and creates a pictorial list so users can download them.
 
-Realistically this could be a webpage with hardcoded URLs but I wanted it to work regardless of what Apple changes. In theory, if Apple updates the OS to include new video wallpapers or makes the URLs on a per-request or per-CPU ID basis, this application should be able to automatically include them as long as the operating system has been updated.
+Realistically the download function could be a webpage with hardcoded URLs but I wanted it to work regardless of what Apple changes. In theory, if Apple updates the OS to include new video wallpapers or makes the URLs on a per-request or per-CPU ID basis, this application should be able to automatically include them as long as the operating system has been updated.
 
-The initial build took roughly 4+ hours, as I'd never built an electron application. For simplicity, this was built using vanilla JavaScript rather than a full-blown framework like React. Ironically, getting notarization working took many many more hours thanks to the pain of Apple's developer portal and my own ignorance around auto-updates requiring signed code.
-
-It has now been ported to Tauri + React to reduce the application size from 190MB+ to about 13MB.
+The initial build was an Electron app written in vanilla JavaScript. It has since been migrated to **Tauri + React**, reducing the application size from ~190 MB to about **13 MB** and improving startup time and memory usage.  Version 1.1.0 has been refactored to use TypeScript, to help with the development process and to improve the code quality.
 
 
-### Future release plans
+### Future release ideas
 
-#### Current To-do:
-
-- Custom icon
-- Sorting options
-- Change the update available interaction
-
-The current design _should_ continue to work moving forward as Apple adds new videos as it reads the current OS's list provided Apple does not radically change the way Wallpapers work. Provided it doesn't require a lot of effort, I'd like to also provide a download completion status and perhaps move this to Next.js or React.
-
-This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality. 
-
-#### Possible features
-
-I may pull the lists from Aerial as I noticed that they have yanked screen savers from Apple TV, as this would give users resolution options or use it to reverse engineer the URLs. (Needs further investigation).
-
-https://github.com/JohnCoates/Aerial/blob/master/Resources/Community/en.json
-
-https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/ManifestLoader.swift
-
-https://github.com/JohnCoates/Aerial/blob/master/Aerial/Source/Models/Sources/SourceInfo.swift
+- Additional sorting and filtering options (by location, time of day, etc.).
+- Smarter handling when Apple adds new videos in future macOS versions.
 
 
 # Troubleshooting / FAQ
@@ -100,7 +94,7 @@ If you're a developer, you may want to poke around yourself in `Library/Applicat
 
 # Developers
 
-This very simplistic Tauri app builds a universal binary for ARM64/x86 Macs. 
+This Tauri app builds a universal binary for ARM64/x86 Macs. 
 
 ## Setup 
 
@@ -111,9 +105,9 @@ This very simplistic Tauri app builds a universal binary for ARM64/x86 Macs.
 
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/macos-sonoma-video-downloader.git
-   cd macos-sonoma-video-downloader
+   ```bash
+   git clone https://github.com/fuzzywalrus/sonoma-wallpaper-downloader.git
+   cd sonoma-wallpaper-downloader
    ```
 
 2. Install dependencies:
@@ -122,11 +116,9 @@ This very simplistic Tauri app builds a universal binary for ARM64/x86 Macs.
    ```
 
 3. Start the development server:
+   ```bash
+   npm run tauri:dev
    ```
- npm run tauri:dev 
-## Dev
-
- ` npm run tauri:dev ` will trigger the development environment.
 
 
 ## Publishing Updates
@@ -134,8 +126,8 @@ This very simplistic Tauri app builds a universal binary for ARM64/x86 Macs.
 1. Update the version in `package.json`
 
 2. Build and publish:
-   ```
-   npm run release
+   ```bash
+   npm run build:sign
    ```
 
  ## Technologies Used
@@ -148,15 +140,16 @@ This very simplistic Tauri app builds a universal binary for ARM64/x86 Macs.
 
 ## Building
 
-You'll need to create a .env file or disable signing. 
+You'll need to create a `.env` file or disable signing.
 
-If you have a valid Apple Developer account, you should be able to create an Apple App password in the Apple Accounts Portal, and in the Apple Developer Portal an App ID. The env file should look the following for building with notarization. 
+If you have a valid Apple Developer account, you can create an app-specific password in the Apple ID portal and configure your Team ID. See `.env.example` for the exact variables (`APPLE_ID`, `APPLE_PASSWORD`, `APPLE_TEAM_ID`, etc.).
 
-See the example .env.example file for reference.
+With `.env` configured, `npm run build:sign` will build, sign, notarize, and staple the DMG.  
+The packaged application will be available under:
 
-
-
-The packaged application will be available in the `dist` directory.
+```text
+src-tauri/target/universal-apple-darwin/release/bundle/dmg/
+```
 
 ## Misc Notes
 

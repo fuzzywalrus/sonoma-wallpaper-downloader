@@ -42,10 +42,10 @@
       <div class="col ">
         <div class="bg">
         <div class="content">
-        <p class="no-margin"><a href="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases"><img src="/img/sonoma-downloader-v1.png" alt="screen shot of sonoma Downloader" class="screenshot"></a></p>
+        <p class="no-margin"><a href="https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases"><img src="/img/mac-video-downloader.webp" alt="screen shot of Mac Video Wallpaper Manager" class="screenshot"></a></p>
         <p class="center subtitle"><small>A free, simple GUI utility made on a whim to download and manage macOS's beautiful video wallpapers.</small></p> <br>
 
-        <p>When Apple introduced the Apple TV 4 one of the most endearing features was elegant video screensavers. These eventually made it to the Mac in macOS 14 Sonoma for use as both screensavers and wallpapers. These stunning backgrounds can be downloaded through System Preferences. However, it doesn't provide a clear path on how to remove them. This utility aims to make downloading them to alternative locations and removing downloaded backgrounds from the system.easier than ever and allows them to be saved wherever a user would like.</p>
+        <p>When Apple introduced the Apple TV 4 one of the most endearing features was elegant video screensavers. These eventually made it to the Mac in macOS 14 Sonoma for use as both screensavers and wallpapers. These stunning backgrounds can be downloaded through System Preferences. However, they are <strong>Large Files</strong> and it doesn't provide a clear path on how to remove them. This utility aims to make downloading them to alternative locations and removing downloaded backgrounds from the system.easier than ever and allows them to be saved wherever a user would like.</p>
         <p>This utility does not require Sonoma.</p>
 
 
@@ -67,14 +67,14 @@
         <h3>So what is this app doing exactly....?</h3>
         <p dir="auto">macOS 14 Sonoma shipped with video wallpapers and screensavers akin to the Apple TV. These are video files hosted by Apple and referenced in <code>Library/Application Support/com.apple.idleassetsd/Customer</code> in several files. This application reads the appropriate files and then generates a list of the available video files to the host operating system and creates a pictorial list so users can download them.</p>
         <p dir="auto">In theory, if Apple updates the OS to include new video wallpapers, this application should be able to automatically include them as long as the operating system has been updated.</p>
+        <p dir="auto">This app also allows users to remove the videos from the system if they so choose. They can always be re-downloaded from the Screensaver Preferences if one so chooses.</p>
         <h3>Future release plans</h3>
         <p dir="auto">The current design should continue to work moving forward as Apple adds new videos as it reads the current OS's list, provided Apple does not radically change the way Wallpapers work.</p>
         <p dir="auto">This application's intent is a simple point-and-click interface for downloading the videos. There are no plans to extend beyond this functionality.</p>
         <h1>Troubleshooting / FAQ</h1>
-        <h3>Troubleshooting: I can't open the app</h3>
-        <p><p dir="auto">Currently this app is unsigned code and macOS does not like that. Right click and select open, then open again.
+
         <h3>Problem: I can't open the video</h3>
-        <p dir="auto">The application at this time doesn't display the download state, you may have to wait a bit. Also, if you are running an older macOS, it may not support HEVC 4k 240 FPS video. Try using Quicktime.</p>
+        <p dir="auto">The application at this time doesn't display the download state, you may have to wait a bit. Also, if you are running an older macOS, it may not support HEVC 4k 240 FPS video, VLC may play it but your best bet is to try using Quicktime.</p>
         <h3>Can you add different resolution support or different formats</h3>
         <p dir="auto">No. These are the only URLs Apple provides to the videos. If you'd like to change the frames-per-second or resolution, Quicktime can export to different resolutions and you can control the slow motion effect within it. Alternately, Handbrake may work at converting the videos.</p>
         <p dir="auto">I will not be making conversions of the videos as they're copyright of Apple.</p>
@@ -82,7 +82,7 @@
         <p dir="auto">I do not know off the top of my head. This application works by reading the existing system pref files on Sonoma, particularly, only two files to generate the list of videos and thumbnails. I am not hosting or distributing anything. This is simply a different front-end for what Apple already provides.</p>
         <p dir="auto">These files were produced by Apple or licensed by Apple. I'd <em>highly</em> recommend not using the videos for anything commercial, only personal projects or for your own personal enjoyment.</p>
         <h3>Can you add more videos or let me add my own videos to my system preferences?</h3>
-        <p dir="auto">No. Watch the YouTube video for a deeper explination. There are applications that do offer alternatives to Apple's screen savers and wallpapers. I've investigated letting users customize videos and in my very quick surface test, it doesn't appear that it is editable without going into the SQLlite database. A portion the DB is encrypted.</p>
+        <p dir="auto">No. Watch the YouTube video for a deeper explanation. There are applications that do offer alternatives to Apple's screen savers and wallpapers. I've investigated letting users customize videos and in my very quick surface test, it doesn't appear that it is editable without going into the SQLlite database. A portion the DB is encrypted.</p>
         <p dir="auto">If you're a developer, you may want to poke around yourself in <code>Library/Application Support/com.apple.idleassetsd/</code></p>
 
         <hr>
