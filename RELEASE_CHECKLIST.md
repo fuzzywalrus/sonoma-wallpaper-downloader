@@ -1,8 +1,8 @@
-# Release Checklist v1.0.5
+# Release Checklist v1.1.0
 
 ## ✅ Pre-Release (Completed)
 
-- [x] Updated version to 1.0.5 in all files
+- [x] Updated version to 1.1.0 in all files
   - [x] package.json
   - [x] src-tauri/tauri.conf.json
   - [x] src-tauri/Cargo.toml
@@ -21,7 +21,7 @@
 
 ### Tauri Version (Recommended)
 ```
-File: macOS Video Downloader_1.0.5_universal.dmg
+File: Mac Video Wallpaper Manager_1.1.0_universal.dmg
 Location: src-tauri/target/universal-apple-darwin/release/bundle/dmg/
 Size: ~13 MB
 Status: ✅ Signed ✅ Notarized ✅ Stapled
@@ -30,7 +30,7 @@ Architectures: Intel (x86_64) + Apple Silicon (ARM64)
 
 ### Electron Version (Final - with migration notice)
 ```
-File: macOS Video Downloader-1.0.5-universal.dmg
+File: Mac Video Wallpaper Manager-1.1.0-universal.dmg
 Location: dist/
 Size: ~192 MB
 Status: ✅ Signed ⚠️ Not notarized (optional)
@@ -44,13 +44,13 @@ Purpose: Auto-update from v1.0.4, shows migration banner
 
 1. Go to: https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases/new
 
-2. **Tag**: `v1.0.5`
+2. **Tag**: `v1.1.0`
 
-3. **Title**: `v1.0.5 - Tauri Migration Release`
+3. **Title**: `v1.1.0 - Tauri Migration Release`
 
 4. **Description**:
 ```markdown
-# macOS Video Downloader v1.0.5
+# Mac Video Wallpaper Manager v1.1.0
 
 ## 🎉 Major Update: Migrated to Tauri!
 
@@ -67,7 +67,7 @@ This release marks a complete rewrite using modern Tauri framework.
 ### 📥 Downloads
 
 **🔹 New Users - Download This:**
-- **macOS Video Downloader_1.0.5_universal.dmg** (Tauri - Recommended)
+- **Mac Video Wallpaper Manager_1.1.0_universal.dmg** (Tauri - Recommended)
   - 13 MB, fully signed & notarized
   - Works on macOS Sonoma 14.0+
   - Intel (x86_64) + Apple Silicon (ARM64)
@@ -75,7 +75,7 @@ This release marks a complete rewrite using modern Tauri framework.
 **🔹 Existing Users (v1.0.4):**
 Your app will auto-update to the Electron version below, which will show you how to upgrade to Tauri.
 
-- **macOS Video Downloader-1.0.5-universal.dmg** (Electron - Final Version)
+- **Mac Video Wallpaper Manager-1.1.0-universal.dmg** (Electron - Final Version)
   - 192 MB, shows migration notice
   - Auto-updateable from v1.0.4
   - Directs you to download Tauri version
@@ -120,7 +120,7 @@ npm run electron:build
 
 ### 📝 Full Changelog
 
-See [RELEASE_NOTES_1.0.5.md](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/blob/main/RELEASE_NOTES_1.0.5.md)
+See [RELEASE_NOTES_1.1.0.md](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/blob/main/RELEASE_NOTES_1.1.0.md)
 
 ---
 
@@ -128,8 +128,8 @@ See [RELEASE_NOTES_1.0.5.md](https://github.com/fuzzywalrus/sonoma-wallpaper-dow
 ```
 
 5. **Upload Files**:
-   - ✅ `macOS Video Downloader_1.0.5_universal.dmg` (Tauri - from src-tauri/target/)
-   - ✅ `macOS Video Downloader-1.0.5-universal.dmg` (Electron - from dist/)
+   - ✅ `Mac Video Wallpaper Manager_1.1.0_universal.dmg` (Tauri - from src-tauri/target/)
+   - ✅ `Mac Video Wallpaper Manager-1.1.0-universal.dmg` (Electron - from dist/)
    - ✅ `latest-mac.yml` (if exists in dist/ - for Electron auto-update)
 
 6. **Check "Set as the latest release"**
@@ -145,7 +145,7 @@ Update the README to reflect Tauri migration:
 
 Download the latest version from [GitHub Releases](https://github.com/fuzzywalrus/sonoma-wallpaper-downloader/releases/latest)
 
-**Recommended**: Download `macOS Video Downloader_1.0.5_universal.dmg` (Tauri version)
+**Recommended**: Download `Mac Video Wallpaper Manager_1.1.0_universal.dmg` (Tauri version)
 
 ## Features
 

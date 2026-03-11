@@ -372,13 +372,96 @@ button {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+.screensaver-manager {
+  margin-top: 6px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #d8d8de;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 6px 16px rgba(0, 0, 0, 0.06);
+  backdrop-filter: saturate(140%) blur(14px);
+}
+
+.screensaver-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e4e4ea;
+}
+
+.screensaver-title h4 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.screensaver-title p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #6e6e73;
+}
+
+.screensaver-title code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: #f3f3f7;
+  border: 1px solid #e1e1e8;
+  color: #5d5d63;
+}
+
+.screensaver-refresh {
+  border: 1px solid #c8c8cf;
+  border-radius: 8px;
+  padding: 6px 12px;
+  min-height: 30px;
+  font-size: 12px;
+  font-weight: 560;
+  color: #1f1f23;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f0f3 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.screensaver-refresh:hover:not(:disabled) {
+  background: linear-gradient(180deg, #ffffff 0%, #ececf0 100%);
+}
+
+.screensaver-refresh:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.screensaver-meta {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.screensaver-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #d7d7dd;
+  background: #f8f8fb;
+  font-size: 12px;
+  font-weight: 550;
+  color: #494950;
+}
+
 .screensaver-error {
   margin-top: 12px;
   padding: 10px 12px;
-  background: rgba(255, 59, 48, 0.06);
-  border: 1px solid rgba(255, 59, 48, 0.4);
+  background: rgba(255, 59, 48, 0.09);
+  border: 1px solid rgba(255, 59, 48, 0.35);
   border-radius: 8px;
-  color: #b00020;
+  color: #ad1d13;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -387,16 +470,100 @@ button {
 
 .screensaver-error p {
   margin: 0;
+  color: #ad1d13;
   font-size: 13px;
 }
 
 .screensaver-error button {
   font-size: 12px;
-  padding: 4px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 59, 48, 0.4);
-  background: transparent;
-  color: #b00020;
+  border: 1px solid rgba(255, 59, 48, 0.35);
+  background: rgba(255, 255, 255, 0.45);
+  color: #ad1d13;
+}
+
+.screensaver-table-wrap {
+  margin-top: 12px;
+  border: 1px solid #d9d9e1;
+  border-radius: 10px;
+  overflow: auto;
+  background: #ffffff;
+}
+
+.screensaver-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.screensaver-table thead tr {
+  background: #f7f7fa;
+}
+
+.screensaver-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: #66666d;
+  border-bottom: 1px solid #e1e1e8;
+  text-transform: uppercase;
+}
+
+.screensaver-table td {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #1d1d1f;
+  vertical-align: middle;
+}
+
+.screensaver-table tbody tr + tr td {
+  border-top: 1px solid #ededf3;
+}
+
+.screensaver-table tbody tr:hover {
+  background: rgba(0, 113, 227, 0.06);
+}
+
+.screensaver-name span,
+.screensaver-folder span {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.screensaver-size {
+  color: #55555b;
+  white-space: nowrap;
+}
+
+
+.screensaver-delete {
+  border: 1px solid rgba(255, 59, 48, 0.35);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 560;
+  color: #d02d22;
+  background: rgba(255, 59, 48, 0.08);
+}
+
+.screensaver-delete:hover {
+  background: rgba(255, 59, 48, 0.14);
+}
+
+.screensaver-empty {
+  margin: 12px 0 0;
+  padding: 14px 12px;
+  border-radius: 8px;
+  border: 1px dashed #d4d4dc;
+  background: #fafafd;
+  font-size: 13px;
+  color: #696971;
 }
 
 /* Responsive adjustments */
@@ -404,13 +571,240 @@ button {
   .download-list {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
+
+  .screensaver-manager {
+    padding: 12px;
+  }
+
+  .screensaver-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .screensaver-title h4 {
+    font-size: 26px;
+  }
+
+  .screensaver-refresh {
+    align-self: flex-start;
+  }
+
+  .screensaver-error {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   
   .app-header h3 {
     font-size: 18px;
   }
 }
 
-/* Subtle animations */
+/* ── Tab bar / toolbar ──────────────────────────────────────────────── */
+
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--macos-border);
+  gap: 12px;
+}
+
+.tab-bar {
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.tab-bar button {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--macos-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.tab-bar button:hover:not(.active) {
+  color: var(--macos-text);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.tab-bar button.active {
+  background: var(--macos-surface);
+  color: var(--macos-text);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+}
+
+.about-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--macos-border);
+  background: transparent;
+  color: var(--macos-text-secondary);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.about-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--macos-text);
+}
+
+/* ── About modal ────────────────────────────────────────────────────── */
+
+.about-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.about-modal {
+  background: var(--macos-surface);
+  border-radius: 14px;
+  padding: 32px 28px 24px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  animation: slideIn 0.2s ease-out;
+}
+
+.about-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-name {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--macos-text);
+}
+
+.about-version {
+  font-size: 13px;
+  color: var(--macos-text-secondary);
+  margin: 0 0 4px;
+}
+
+.about-formerly {
+  font-size: 12px;
+  color: var(--macos-text-secondary);
+  margin: 0 0 8px;
+  font-style: italic;
+}
+
+.about-credit {
+  font-size: 13px;
+  color: var(--macos-text-secondary);
+  margin: 0 0 20px;
+}
+
+.about-credit a {
+  color: var(--macos-accent);
+  text-decoration: none;
+}
+
+.about-credit a:hover {
+  text-decoration: underline;
+}
+
+.about-close {
+  padding: 7px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--macos-border);
+  background: var(--macos-background);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--macos-text);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.about-close:hover {
+  background: #ebebed;
+}
+
+/* ── Inline delete confirmation ─────────────────────────────────────── */
+
+.screensaver-actions {
+  text-align: right;
+  width: 200px;
+}
+
+.screensaver-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.screensaver-confirm-text {
+  font-size: 12px;
+  color: var(--macos-text-secondary);
+  white-space: nowrap;
+}
+
+.btn-cancel {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--macos-border);
+  background: var(--macos-background);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--macos-text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.btn-cancel:hover {
+  background: #ebebed;
+}
+
+.btn-delete-confirm {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 59, 48, 0.4);
+  background: rgba(255, 59, 48, 0.1);
+  font-size: 12px;
+  font-weight: 560;
+  color: #d02d22;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.btn-delete-confirm:hover {
+  background: rgba(255, 59, 48, 0.18);
+}
+
+/* ── Subtle animations */
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4);

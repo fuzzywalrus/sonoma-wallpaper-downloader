@@ -9,6 +9,7 @@ const ScreensaverManager = () => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [confirmingPath, setConfirmingPath] = useState(null);
 
   const load = async () => {
     setLoading(true);
@@ -29,14 +30,7 @@ const ScreensaverManager = () => {
   }, []);
 
   const handleDelete = async (path) => {
-    const file = files.find((f) => f.path === path);
-    const name = file?.name || path;
-
-    // eslint-disable-next-line no-restricted-globals
-    if (!window.confirm(`Delete “${name}”? This removes the downloaded video from disk.`)) {
-      return;
-    }
-
+    setConfirmingPath(null);
     try {
       const ok = await deleteScreensaver(path);
       if (ok) {
@@ -67,25 +61,35 @@ const ScreensaverManager = () => {
   return (
     <div className="screensaver-manager">
       <div className="screensaver-header">
-        <h4>Manage downloaded screensavers</h4>
-        <p>
-          Showing videos from{' '}
-          <code>/Library/Application Support/com.apple.idleassetsd/Customer/</code>
-        </p>
-        <div className="screensaver-meta">
-          <span>{files.length} file{files.length === 1 ? '' : 's'}</span>
-          <span>Total size: {formatSize(totalBytes)}</span>
-          <button type="button" onClick={load} disabled={loading}>
-            {loading ? 'Refreshing…' : 'Refresh'}
-          </button>
+        <div className="screensaver-title">
+          <h4>Manage Downloaded Screensavers</h4>
+          <p>
+            Showing videos from{' '}
+            <code>/Library/Application Support/com.apple.idleassetsd/Customer/</code>
+          </p>
         </div>
+        <button
+          type="button"
+          className="screensaver-refresh"
+          onClick={load}
+          disabled={loading}
+        >
+          {loading ? 'Refreshing…' : 'Refresh'}
+        </button>
+      </div>
+
+      <div className="screensaver-meta" aria-live="polite">
+        <span className="screensaver-chip">
+          {files.length} file{files.length === 1 ? '' : 's'}
+        </span>
+        <span className="screensaver-chip">Total size {formatSize(totalBytes)}</span>
       </div>
 
       {error && (
         <div className="screensaver-error">
           <p>{error}</p>
           <button type="button" onClick={openFullDiskAccessSettings}>
-            Open Full Disk Access settings
+            Open Full Disk Access
           </button>
         </div>
       )}
@@ -97,37 +101,63 @@ const ScreensaverManager = () => {
       )}
 
       {files.length > 0 && (
-        <table className="screensaver-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Folder</th>
-              <th>Size</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {files.map((file) => (
-              <tr key={file.path}>
-                <td>{file.name}</td>
-                <td>{file.folder}</td>
-                <td>{formatSize(file.sizeBytes)}</td>
-                <td className="screensaver-actions">
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(file.path)}
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="screensaver-table-wrap">
+          <table className="screensaver-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Folder</th>
+                <th>Size</th>
+                <th />
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {files.map((file) => (
+                <tr key={file.path}>
+                  <td className="screensaver-name" title={file.name}>
+                    <span>{file.name}</span>
+                  </td>
+                  <td className="screensaver-folder" title={file.folder}>
+                    <span>{file.folder}</span>
+                  </td>
+                  <td className="screensaver-size">{formatSize(file.sizeBytes)}</td>
+                  <td className="screensaver-actions">
+                    {confirmingPath === file.path ? (
+                      <div className="screensaver-confirm">
+                        <span className="screensaver-confirm-text">Delete this file?</span>
+                        <button
+                          type="button"
+                          className="btn-cancel"
+                          onClick={() => setConfirmingPath(null)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-delete-confirm"
+                          onClick={() => handleDelete(file.path)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="screensaver-delete"
+                        onClick={() => setConfirmingPath(file.path)}
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
 };
 
 export default ScreensaverManager;
-

@@ -1,4 +1,4 @@
-# macOS Video Downloader
+# Mac Video Wallpaper Manager
 
 A React + Tarui application for downloading macOS video wallpapers (Sonoma and above).
 cl

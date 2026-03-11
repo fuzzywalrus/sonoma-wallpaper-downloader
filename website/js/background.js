@@ -58,10 +58,11 @@
     '  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);',
     '}',
     '',
+    // Reduced from 5 to 4 octaves — 5th contributes < 4% of signal, not worth the cost
     'float fbm(vec2 p) {',
     '  float value = 0.0;',
     '  float amp = 0.5;',
-    '  for (int i = 0; i < 5; i++) {',
+    '  for (int i = 0; i < 4; i++) {',
     '    value += amp * noise(p);',
     '    p = p * 2.02 + vec2(12.3, 4.7);',
     '    amp *= 0.5;',
@@ -69,14 +70,12 @@
     '  return value;',
     '}',
     '',
+    // Branchless palette — eliminates GPU warp divergence from if-branches
     'vec3 palette(float t, vec3 c0, vec3 c1, vec3 c2, vec3 c3) {',
-    '  if (t < 0.33) {',
-    '    return mix(c0, c1, t / 0.33);',
-    '  }',
-    '  if (t < 0.66) {',
-    '    return mix(c1, c2, (t - 0.33) / 0.33);',
-    '  }',
-    '  return mix(c2, c3, (t - 0.66) / 0.34);',
+    '  vec3 ab = mix(c0, c1, clamp(t * 3.030, 0.0, 1.0));',
+    '  vec3 bc = mix(c1, c2, clamp((t - 0.33) * 3.030, 0.0, 1.0));',
+    '  vec3 cd = mix(c2, c3, clamp((t - 0.66) * 2.941, 0.0, 1.0));',
+    '  return mix(mix(ab, bc, step(0.33, t)), cd, step(0.66, t));',
     '}',
     '',
     'float ribbonMask(vec2 p, float center, float width) {',
@@ -135,12 +134,13 @@
     '  base = mix(base, ribbonColor2, r2 * 0.44);',
     '  base = mix(base, ribbonColor3, r3 * 0.30);',
     '',
-    '  base += ribbonColor1 * pow(r1, 2.0) * 0.25;',
-    '  base += ribbonColor2 * pow(r2, 2.0) * 0.15;',
+    // x*x instead of pow(x, 2.0) — many GLSL compilers (especially Firefox) don't optimize pow for integer exponents
+    '  base += ribbonColor1 * (r1 * r1) * 0.25;',
+    '  base += ribbonColor2 * (r2 * r2) * 0.15;',
     '  base += (ribbonColor1 - ribbonColor3) * u_scrollInfluence * 0.06;',
     '',
-    '  float haze = pow(max(fbm(p * 2.4 + vec2(t * 0.05, t * 0.02)) - 0.55, 0.0), 2.0);',
-    '  base += mix(c0, c2, 0.5) * haze * (0.08 + 0.14 * u_quality);',
+    '  float hazeSample = max(fbm(p * 2.4 + vec2(t * 0.05, t * 0.02)) - 0.55, 0.0);',
+    '  base += mix(c0, c2, 0.5) * (hazeSample * hazeSample) * (0.08 + 0.14 * u_quality);',
     '',
     '  float starField = hash(floor((p + drift * 2.0) * vec2(120.0, 80.0)));',
     '  float spark = smoothstep(0.992, 1.0, starField);',
@@ -259,6 +259,7 @@
   ];
 
   var qualityTier = getQualityTier();
+  var qualityScalar = getQualityScalar();
   var reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var reduceMotion = reducedMotionQuery ? reducedMotionQuery.matches : false;
 
@@ -346,8 +347,11 @@
     }
   }
 
+  // resize() is now event-driven only — calling it every frame caused layout
+  // thrashing (60 DOM reads/sec) that was especially severe in Firefox.
   function resize() {
     qualityTier = getQualityTier();
+    qualityScalar = getQualityScalar();
     var dpr = Math.min(window.devicePixelRatio || 1, getDevicePixelRatioCap());
     var w = Math.floor(window.innerWidth * dpr);
     var h = Math.floor(window.innerHeight * dpr);
@@ -364,7 +368,6 @@
   }
 
   function draw(frameNow) {
-    resize();
     var activeNow = frameNow - pausedMs;
     var elapsed = Math.max(activeNow - startTime, 0);
     var smoothing = reduceMotion ? 0.05 : 0.10;
@@ -395,7 +398,7 @@
     gl.uniform2f(locations.resolution, canvasWidth, canvasHeight);
     gl.uniform1f(locations.sceneMix, 0);
     gl.uniform1f(locations.motion, motion);
-    gl.uniform1f(locations.quality, getQualityScalar());
+    gl.uniform1f(locations.quality, qualityScalar);
     gl.uniform2f(locations.scrollOffset, flowX, flowY);
     gl.uniform1f(locations.scrollInfluence, flowInfluence);
 

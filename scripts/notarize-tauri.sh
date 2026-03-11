@@ -33,7 +33,7 @@ if [ -z "$APPLE_ID" ] || [ -z "$APPLE_PASSWORD" ] || [ -z "$APPLE_TEAM_ID" ]; th
 fi
 
 # Find the DMG file (current version)
-DMG_PATH="src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg"
+DMG_PATH="src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg"
 
 if [ ! -f "$DMG_PATH" ]; then
     echo -e "${RED}❌ DMG not found at: $DMG_PATH${NC}"

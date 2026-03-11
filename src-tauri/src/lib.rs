@@ -169,18 +169,28 @@ async fn delete_screensaver(target_path: String) -> Result<bool, String> {
 
 #[tauri::command]
 async fn open_full_disk_access_settings() -> Result<bool, String> {
-    // Open System Settings at Privacy & Security → Full Disk Access
-    // Uses the same URL scheme Apple documents for deep linking into preferences
-    let status = std::process::Command::new("open")
-        .arg("x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")
-        .status()
-        .map_err(|e| format!("Failed to launch System Settings: {e}"))?;
+    // Try multiple deep links since Apple has changed URL tokens between releases.
+    let targets = [
+        "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles",
+        "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles",
+        "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension",
+        "x-apple.systempreferences:com.apple.preference.security",
+    ];
 
-    if status.success() {
-        Ok(true)
-    } else {
-        Err(format!("System Settings exited with status: {status}"))
+    let mut errors: Vec<String> = Vec::new();
+
+    for target in targets {
+        match std::process::Command::new("open").arg(target).status() {
+            Ok(status) if status.success() => return Ok(true),
+            Ok(status) => errors.push(format!("{target} -> exit status {status}")),
+            Err(e) => errors.push(format!("{target} -> {e}")),
+        }
     }
+
+    Err(format!(
+        "Failed to open System Settings Full Disk Access panel. Attempts: {}",
+        errors.join(" | ")
+    ))
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

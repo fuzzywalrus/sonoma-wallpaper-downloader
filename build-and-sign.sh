@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #############################################
-# macOS Video Downloader - Build & Sign Script
+# Mac Video Wallpaper Manager - Build & Sign Script
 # Builds, signs, and notarizes the Tauri app
 #############################################
 
@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 
 echo ""
 echo -e "${BLUE}╔═══════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║  macOS Video Downloader - Build & Sign       ║${NC}"
+echo -e "${BLUE}║  Mac Video Wallpaper Manager - Build & Sign       ║${NC}"
 echo -e "${BLUE}╚═══════════════════════════════════════════════╝${NC}"
 echo ""
 
@@ -81,7 +81,7 @@ echo -e "${BLUE}   This may take a few minutes...${NC}"
 npm run tauri:build:universal
 
 # Check if build succeeded
-if [ ! -f "src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg" ]; then
+if [ ! -f "src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg" ]; then
     echo -e "${RED}❌ Build failed - DMG not found${NC}"
     exit 1
 fi
@@ -92,7 +92,7 @@ echo -e "${GREEN}✅ Build complete!${NC}"
 # Verify code signature
 echo ""
 echo -e "${BLUE}🔐 Verifying code signature...${NC}"
-codesign -vvv --deep --strict "src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg" 2>&1 | head -3
+codesign -vvv --deep --strict "src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg" 2>&1 | head -3
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Code signature verified${NC}"
@@ -104,7 +104,7 @@ fi
 # Verify universal binary
 echo ""
 echo -e "${BLUE}🔍 Verifying universal binary...${NC}"
-BINARY_PATH="src-tauri/target/universal-apple-darwin/release/bundle/macos/macOS Video Downloader.app/Contents/MacOS/macos-video-downloader"
+BINARY_PATH="src-tauri/target/universal-apple-darwin/release/bundle/macos/Mac Video Wallpaper Manager.app/Contents/MacOS/macos-video-downloader"
 if [ -f "$BINARY_PATH" ]; then
     LIPO_OUTPUT=$(lipo -info "$BINARY_PATH")
     if echo "$LIPO_OUTPUT" | grep -q "x86_64 arm64"; then
@@ -123,7 +123,7 @@ if [ "$NOTARIZE" = true ]; then
     echo -e "${BLUE}   This may take a few minutes...${NC}"
 
     NOTARIZE_OUTPUT=$(xcrun notarytool submit \
-        "src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg" \
+        "src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg" \
         --apple-id "$APPLE_ID" \
         --password "$APPLE_PASSWORD" \
         --team-id "$APPLE_TEAM_ID" \
@@ -135,7 +135,7 @@ if [ "$NOTARIZE" = true ]; then
         # Staple the notarization ticket
         echo ""
         echo -e "${BLUE}📎 Stapling notarization ticket...${NC}"
-        xcrun stapler staple "src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg"
+        xcrun stapler staple "src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg"
 
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}✅ Notarization ticket stapled${NC}"
@@ -143,7 +143,7 @@ if [ "$NOTARIZE" = true ]; then
             # Verify Gatekeeper approval
             echo ""
             echo -e "${BLUE}🔍 Verifying Gatekeeper approval...${NC}"
-            SPCTL_OUTPUT=$(spctl -a -vvv -t install "src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg" 2>&1)
+            SPCTL_OUTPUT=$(spctl -a -vvv -t install "src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg" 2>&1)
 
             if echo "$SPCTL_OUTPUT" | grep -q "accepted"; then
                 echo -e "${GREEN}✅ Gatekeeper: ACCEPTED${NC}"
@@ -167,7 +167,7 @@ echo -e "${BLUE}║              Build Summary                    ║${NC}"
 echo -e "${BLUE}╚═══════════════════════════════════════════════╝${NC}"
 echo ""
 
-DMG_PATH="src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg"
+DMG_PATH="src-tauri/target/universal-apple-darwin/release/bundle/dmg/Mac Video Wallpaper Manager_1.1.0_universal.dmg"
 DMG_SIZE=$(du -h "$DMG_PATH" | awk '{print $1}')
 
 echo -e "${GREEN}✅ DMG Location:${NC}"

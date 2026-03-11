@@ -1,9 +1,27 @@
 const CUSTOMER_DIR = '/Library/Application Support/com.apple.idleassetsd/Customer/';
 
+const isTauriRuntime = () => (
+  typeof window !== 'undefined'
+  && (window.__TAURI_INTERNALS__ !== undefined || window.__TAURI__ !== undefined || !!window.tauri)
+);
+
 const getEnv = () => {
-  if (window.tauri) return 'tauri';
   if (window.electron) return 'electron';
+  if (isTauriRuntime()) return 'tauri';
   return 'web';
+};
+
+const invokeTauriCommand = async (command, payload = {}) => {
+  try {
+    const { invoke } = await import('@tauri-apps/api/core');
+    return await invoke(command, payload);
+  } catch (importError) {
+    const fallbackInvoke = window.__TAURI__?.core?.invoke || window.__TAURI__?.tauri?.invoke;
+    if (typeof fallbackInvoke === 'function') {
+      return await fallbackInvoke(command, payload);
+    }
+    throw importError;
+  }
 };
 
 export const listScreensavers = async () => {
@@ -25,9 +43,7 @@ export const listScreensavers = async () => {
 
   if (env === 'tauri') {
     try {
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-      const { invoke } = window.__TAURI__?.tauri || require('@tauri-apps/api/tauri');
-      const files = await invoke('list_screensavers');
+      const files = await invokeTauriCommand('list_screensavers');
       return files || [];
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -60,9 +76,7 @@ export const deleteScreensaver = async (path) => {
 
   if (env === 'tauri') {
     try {
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-      const { invoke } = window.__TAURI__?.tauri || require('@tauri-apps/api/tauri');
-      const ok = await invoke('delete_screensaver', { targetPath: path });
+      const ok = await invokeTauriCommand('delete_screensaver', { targetPath: path });
       return !!ok;
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -82,27 +96,26 @@ export const openFullDiskAccessSettings = async () => {
       const result = await window.electron.screensavers.openFullDiskAccessSettings();
       if (!result || !result.ok) {
         // eslint-disable-next-line no-alert
-        alert('Unable to open Full Disk Access settings automatically. Please open System Settings → Privacy & Security → Full Disk Access and add macOS Video Downloader.');
+        alert('Unable to open Full Disk Access settings automatically. Please open System Settings → Privacy & Security → Full Disk Access and add Mac Video Wallpaper Manager.');
       }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Electron openFullDiskAccessSettings failed', e);
       // eslint-disable-next-line no-alert
-      alert('Unable to open Full Disk Access settings automatically. Please open System Settings → Privacy & Security → Full Disk Access and add macOS Video Downloader.');
+      alert('Unable to open Full Disk Access settings automatically. Please open System Settings → Privacy & Security → Full Disk Access and add Mac Video Wallpaper Manager.');
     }
     return;
   }
 
   if (env === 'tauri') {
     try {
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-      const { invoke } = window.__TAURI__?.tauri || require('@tauri-apps/api/tauri');
-      await invoke('open_full_disk_access_settings');
+      await invokeTauriCommand('open_full_disk_access_settings');
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Tauri open_full_disk_access_settings failed', e);
+      // eslint-disable-next-line no-alert
+      alert('Unable to open Full Disk Access settings automatically. Open System Settings → Privacy & Security → Full Disk Access. If you are running in dev mode, build/run the .app bundle and add it manually.');
     }
   }
 };
-
 
