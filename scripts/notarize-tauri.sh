@@ -16,7 +16,8 @@ echo ""
 
 # Load environment variables
 if [ -f .env ]; then
-    export $(cat .env | grep -v '^#' | xargs)
+    # shellcheck disable=SC2046
+    export $(grep -v '^#' .env | xargs)
     echo -e "${GREEN}✅ Loaded .env file${NC}"
 else
     echo -e "${RED}❌ .env file not found. Please create it with your Apple credentials.${NC}"
@@ -24,15 +25,15 @@ else
     exit 1
 fi
 
-# Check required variables
-if [ -z "$APPLEID" ] || [ -z "$APPLEIDPASS" ] || [ -z "$TEAMID" ]; then
+# Check required variables (use the same names as .env and build-and-sign.sh)
+if [ -z "$APPLE_ID" ] || [ -z "$APPLE_PASSWORD" ] || [ -z "$APPLE_TEAM_ID" ]; then
     echo -e "${RED}❌ Missing required environment variables${NC}"
-    echo "Required: APPLEID, APPLEIDPASS, TEAMID"
+    echo "Required: APPLE_ID, APPLE_PASSWORD, APPLE_TEAM_ID"
     exit 1
 fi
 
-# Find the DMG file
-DMG_PATH="src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.4_universal.dmg"
+# Find the DMG file (current version)
+DMG_PATH="src-tauri/target/universal-apple-darwin/release/bundle/dmg/macOS Video Downloader_1.0.5_universal.dmg"
 
 if [ ! -f "$DMG_PATH" ]; then
     echo -e "${RED}❌ DMG not found at: $DMG_PATH${NC}"
@@ -46,9 +47,9 @@ echo ""
 # Submit for notarization
 echo -e "${BLUE}📤 Submitting for notarization...${NC}"
 xcrun notarytool submit "$DMG_PATH" \
-    --apple-id "$APPLEID" \
-    --password "$APPLEIDPASS" \
-    --team-id "$TEAMID" \
+    --apple-id "$APPLE_ID" \
+    --password "$APPLE_PASSWORD" \
+    --team-id "$APPLE_TEAM_ID" \
     --wait
 
 # Check if notarization was successful

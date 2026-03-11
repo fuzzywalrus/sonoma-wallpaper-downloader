@@ -1,8 +1,9 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, session, ipcMain } = require('electron');
+const { app, BrowserWindow, session, ipcMain, shell } = require('electron');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
 const fs = require('fs').promises;
+const fssync = require('fs');
 const bplistParser = require('bplist-parser');
 
 // Set up the logger for autoUpdater
@@ -149,6 +150,81 @@ ipcMain.handle('bplist:parseBuffer', async (event, buffer) => {
     console.error('Error parsing bplist:', error);
     // Return empty data instead of throwing
     return [{}];
+  }
+});
+
+const CUSTOMER_DIR = '/Library/Application Support/com.apple.idleassetsd/Customer';
+const VIDEO_EXTENSIONS = ['.mov', '.mp4', '.m4v', '.hevc'];
+
+function isVideoFile(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  return VIDEO_EXTENSIONS.includes(ext);
+}
+
+async function listCustomerFiles() {
+  const results = [];
+
+  try {
+    const entries = await fs.readdir(CUSTOMER_DIR, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const subdir = path.join(CUSTOMER_DIR, entry.name);
+      const files = await fs.readdir(subdir, { withFileTypes: true });
+      for (const file of files) {
+        if (!file.isFile()) continue;
+        const fullPath = path.join(subdir, file.name);
+        if (!isVideoFile(fullPath)) continue;
+        try {
+          const stat = await fs.stat(fullPath);
+          results.push({
+            path: fullPath,
+            name: file.name,
+            folder: entry.name,
+            sizeBytes: stat.size,
+            mtimeMs: stat.mtimeMs,
+          });
+        } catch (e) {
+          console.error('Error statting file', fullPath, e);
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Error reading Customer directory', e);
+    throw e;
+  }
+
+  return results;
+}
+
+ipcMain.handle('screensavers:list', async () => {
+  return listCustomerFiles();
+});
+
+ipcMain.handle('screensavers:delete', async (event, targetPath) => {
+  try {
+    if (!targetPath.startsWith(CUSTOMER_DIR)) {
+      throw new Error('Refusing to delete outside Customer directory');
+    }
+    if (!isVideoFile(targetPath)) {
+      throw new Error('Refusing to delete non-video file');
+    }
+    await fs.unlink(targetPath);
+    return { ok: true };
+  } catch (e) {
+    console.error('Failed to delete screensaver file', targetPath, e);
+    return { ok: false, error: e.message || String(e) };
+  }
+});
+
+ipcMain.handle('screensavers:openFullDiskAccessSettings', async () => {
+  try {
+    await shell.openExternal(
+      'x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles'
+    );
+    return { ok: true };
+  } catch (e) {
+    console.error('Failed to open Full Disk Access settings', e);
+    return { ok: false, error: e.message || String(e) };
   }
 });
 

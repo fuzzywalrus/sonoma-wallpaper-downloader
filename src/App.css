@@ -124,6 +124,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   opacity: 0;
   transition: opacity 0.2s ease;
   animation: fadeIn 0.2s ease forwards;
@@ -138,6 +139,30 @@ p {
   color: white;
   width: 32px;
   height: 32px;
+}
+
+.overlay-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.overlay-button:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.overlay-button svg {
+  width: 24px;
+  height: 24px;
 }
 
 .download-item span {
@@ -220,6 +245,59 @@ button {
   background-color: var(--macos-accent-hover);
 }
 
+/* Preview modal */
+.preview-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.preview-modal {
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  padding: 16px 16px 12px;
+  max-width: 960px;
+  width: 90vw;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.preview-modal h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.preview-modal video {
+  width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+  background: #000;
+}
+
+.preview-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.preview-actions button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  font-size: 12px;
+}
+
+.preview-actions button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .update-notification .cancel-button {
   color: var(--macos-text);
   background-color: rgba(0, 0, 0, 0.05);
@@ -234,6 +312,44 @@ button {
   margin-bottom: 20px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--macos-border);
+}
+
+.app-about {
+  font-size: 12px;
+  color: var(--macos-text-secondary);
+  margin-top: 6px;
+}
+
+.startup-screen {
+  padding-top: 8px;
+}
+
+.startup-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.startup-actions button.primary {
+  background-color: var(--macos-accent);
+  color: white;
+}
+
+.startup-actions button.primary:hover {
+  background-color: var(--macos-accent-hover);
+}
+
+.mode-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.mode-toggle button {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--macos-border);
 }
 
 /* Create a subtle toolbar effect */
@@ -254,6 +370,33 @@ button {
 
 .toolbar button:hover {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+.screensaver-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 59, 48, 0.06);
+  border: 1px solid rgba(255, 59, 48, 0.4);
+  border-radius: 8px;
+  color: #b00020;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.screensaver-error p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.screensaver-error button {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 59, 48, 0.4);
+  background: transparent;
+  color: #b00020;
 }
 
 /* Responsive adjustments */
@@ -286,31 +429,6 @@ button {
 }
 
 /* App footer */
-.app-footer {
-  margin-top: 40px;
-  padding: 20px 0;
-  border-top: 1px solid var(--macos-border);
-  text-align: center;
-}
-
-.app-footer p {
-  font-size: 12px;
-  color: var(--macos-text-secondary);
-  margin: 0;
-}
-
-.app-footer a {
-  color: var(--macos-accent);
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--macos-transition);
-}
-
-.app-footer a:hover {
-  color: var(--macos-accent-hover);
-  text-decoration: underline;
-}
-
 /* Migration Notice */
 .migration-notice {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

@@ -25,6 +25,13 @@ contextBridge.exposeInMainWorld('electron', {
     },
   },
 
+  screensavers: {
+    list: () => ipcRenderer.invoke('screensavers:list'),
+    delete: (path) => ipcRenderer.invoke('screensavers:delete', path),
+    openFullDiskAccessSettings: () =>
+      ipcRenderer.invoke('screensavers:openFullDiskAccessSettings'),
+  },
+
   // Send messages to the main process
   send: (channel, ...args) => {
     const validChannels = ['restart_app', 'test', 'check_for_updates'];

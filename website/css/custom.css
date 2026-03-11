@@ -1,15 +1,60 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    color: white;
-    font-size: 16px;
+/* Fallback gradient when WebGL is unavailable (no-js or init failure) */
+html.no-js body,
+body.webgl-fallback {
     background: rgb(73,72,121);
     background: linear-gradient(180deg, rgba(73,72,121,1) 0%, rgba(33,57,116,1) 100%);
+}
+
+body {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    color: white;
+    font-size: 22px;
+    background: transparent;
     min-height: 100vh;
     margin-top:0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-  }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        rgba(7, 10, 16, 0.26) 0%,
+        rgba(7, 10, 16, 0.38) 100%
+    );
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+}
+
+body .container,
+body .container .row,
+body .col {
+    position: relative;
+    z-index: 2;
+}
 .content {
     max-width: 960px;
     margin-left: auto;
@@ -49,7 +94,10 @@ a:visited {
 .bg {
     padding-top: 40px;
     border-radius: 10px;
-    background-color: rgba(0,0,0, 0.3);
+    /* background-color: rgba(0,0,0, 0.3); */
+}
+code {
+    font-size: 16px;
 }
 h1.title {
     font-size: 85px;
@@ -81,16 +129,55 @@ h1.title .embiggen {
     margin:0;
 }
 .footer {
-    font-size: 12px;
-    font-weight: 300;
-    padding-bottom: 10px
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 12px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    white-space: nowrap;
+}
+
+.footer-link:visited {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .footer {
+        justify-content: center;
+        gap: 16px 24px;
+        flex-wrap: wrap;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 16px;
+    }
 }
 @media (max-width: 1400px) {
     h1.title {
         font-size: 82px;
     }
     h1.title .embiggen {
-        font-size: 154px;
+        font-size: 191px;
     }
 }
 
@@ -99,7 +186,7 @@ h1.title .embiggen {
         font-size: 76px;
     }
     h1.title .embiggen {
-        font-size: 120px;
+        font-size: 171px;
     }
 }
   
@@ -108,7 +195,7 @@ h1.title .embiggen {
         font-size: 60px;
     }
     h1.title .embiggen {
-        font-size: 95px;
+        font-size: 136px;
     }
 }
 
@@ -117,7 +204,7 @@ h1.title .embiggen {
         font-size: 42.5px;
     }
     h1.title .embiggen {
-        font-size: 68px;
+        font-size: 97px;
     }
 }
 @media (max-width: 576px) {
@@ -126,6 +213,6 @@ h1.title .embiggen {
     }
     h1.title .embiggen {
         display: block;
-        font-size: 36px;
+        font-size: 52px;
     }
 }

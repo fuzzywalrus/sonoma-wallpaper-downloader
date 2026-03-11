@@ -1,7 +1,7 @@
 import React from 'react';
 import DownloadItem from './DownloadItem';
 
-const DownloadList = ({ assets }) => {
+const DownloadList = ({ assets, onPreview }) => {
   console.log('DownloadList: Rendering with assets:', assets);
   if (!assets || assets.length === 0) {
     return <h5>No entries available</h5>;
@@ -15,6 +15,7 @@ const DownloadList = ({ assets }) => {
           label={asset.newLabel || asset.accessibilityLabel}
           url={asset['url-4K-SDR-240FPS']}
           previewImage={asset.previewImage}
+          onPreview={onPreview}
         />
       ))}
     </ul>

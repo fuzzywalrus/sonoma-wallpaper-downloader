@@ -22,7 +22,8 @@ echo ""
 
 # Load environment variables
 if [ -f .env ]; then
-    export $(cat .env | grep -v '^#' | xargs)
+    # shellcheck disable=SC2046
+    export $(grep -v '^#' .env | xargs)
     echo -e "${GREEN}✅ Loaded .env file${NC}"
 else
     echo -e "${YELLOW}⚠️  .env file not found${NC}"
@@ -42,8 +43,8 @@ if ! command -v cargo &> /dev/null; then
     fi
 fi
 
-# Verify signing identity
-SIGNING_IDENTITY="Developer ID Application: Greg Gant (36SA478KNK)"
+# Verify signing identity (allow override from .env)
+SIGNING_IDENTITY="${APPLE_SIGNING_IDENTITY:-Developer ID Application: Greg Gant (36SA478KNK)}"
 echo ""
 echo -e "${BLUE}🔍 Verifying code signing identity...${NC}"
 if security find-identity -v -p codesigning | grep -q "$SIGNING_IDENTITY"; then
